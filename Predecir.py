@@ -1,3 +1,3 @@
-import numpy as np
-a = 2+2
-print(a) 
+import numpy as numpy
+a = np.ones((3,4))
+print(a)
