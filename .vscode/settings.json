@@ -2,5 +2,13 @@
     "python.pythonPath": "C:\\Users\\pasky\\Anaconda3\\python.exe",
     "python.linting.pylintEnabled": true,
     "python.condaPath":"C:\\Users\\pasky\\Anaconda3\\envs\\tf\\python.exe",
-    "python.linting.enabled": true
+    "python.linting.enabled": true,
+    "spellright.language": [
+        "es"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext"
+    ]
 }
