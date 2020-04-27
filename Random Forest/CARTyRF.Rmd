@@ -21,7 +21,7 @@ Cargamos el dataframe Actionset. La variable out_action es de tipo factor, prese
 library(xlsx)
 
 #Cargamos el dataframe
-actionset <- read.xlsx("fromStateToAction_RF.xlsx", 
+actionset <- read.xlsx("fromStateToAction_RF_norm.xlsx", 
                 sheetIndex = 1)
 
 #estudiamos sus variables
