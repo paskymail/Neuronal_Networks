@@ -1,0 +1,287 @@
+---
+title: "CART y RF"
+author: "LD Pascual Callejo"
+date: "February 2, 2019"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+\section*{Carga de datos}
+
+Cargamos el dataframe Actionset. La variable out_action es de tipo factor, presentando 28 niveles, cada uno es una accion.
+
+```{r carga}
+#install.packages("xlsx")
+library(xlsx)
+
+#Cargamos el dataframe
+actionset <- read.xlsx("fromStateToAction_RF_norm.xlsx", 
+                sheetIndex = 1)
+
+#estudiamos sus variables
+summary(actionset)
+```
+
+
+\section*{Eleccion de acciones}
+
+Establecer la semilla del generador de numeros pseudoaleatorios de R mediante set.seed(m). 
+
+```{r Letter}
+
+#Elegimos dos acciones aleatorias
+Actions <- c(0:27)
+Actions
+```
+
+
+\section*{Comparacion de modelos}
+Construir de forma razonada y comparar modelos de clasificacion binaria basados en la metodologia CART y  Random Forests. 
+
+```{r comp}
+
+# reducimos actionset a los casos que se corresponden con alguna de las acciones
+Rset <- subset(actionset, actionset$out_action %in% Actions)
+
+# Eliminamos de los niveles del factor Rset$lettr las letras no seleccionadas
+Rset$out_action <- droplevels.factor(Rset$out_action)
+
+# Comprobamos que hemos hecho la reducción correctamente
+dim(Rset)
+summary(Rset$out_action)
+
+# Dividimos el conjunto Rset en subconjunto de entrenammiento 70% y test 30%
+n<- nrow(Rset)
+nent<- ceiling(0.7*n)
+ntest<- n-nent
+indin<- 1:n
+
+set.seed(12345)
+
+# Se hace un sampling aleatorio de los índices de las filas de Rset eligiendo nest
+#muestras sin replazamiento
+indient<- sort(sample(indin,nent))
+
+# El resto de indices de filas no elgidas serán la muestra de test
+inditest<- setdiff(indin,indient)
+
+#Conjuntos de entrenamiento y test en base a los índices de fila elegidos
+actionent<- Rset[indient,]  
+actiontest<- Rset[inditest,]
+
+```
+
+\subsection*{Modelo CART}
+
+Modelo basado en Arboles de clasificacon
+
+```{r CART}
+
+library(rpart)
+
+# Obtenemos el modelo de Arbol de clasificacion sobre el conjunto de entrenamiento
+# Tambi�en podriamos haber usado directamente data =lettertest y utillizar el
+#parámetro subset para indicar que solo usaremos el subconjunto definido por los
+#indices de fila indient (subset= indient)
+
+action.rpart <- rpart(out_action ~ ., data=actionent, method="class")
+
+#Utilizamos el codigo del script del tema7 para obtener la tabla de contingencia y
+#la curva "Receiver Operating Characteristic"
+
+plot(action.rpart,main="CART datos action prediction",uniform=TRUE)
+text(action.rpart,col="blue",cex=0.7)
+
+#Usamos el modelo para predecir el conjunto test
+predictest<- predict(action.rpart,actiontest, type="class")
+
+#Creamos la tabla de contingencia de predicciones vs letra real
+ct1<-table(actiontest$out_action,predictest)
+ct1
+# ACIERTO POR GRUPOS
+100*diag(prop.table(ct1, 1))
+# ACIERTO TOTAL
+TPC1 <- 100*sum(diag(prop.table(ct1)))
+TPC1
+
+
+
+#VALIDACION CRUZADA, REGLA 1-SE
+#rpart calcula para una secuencia de subárboles anidados una estimación del error de
+#clasificación mediante validación cruzada.
+#Se utiliza la regla 1-SE para tener en cuenta la variabilidad del proceso de
+#selcción de variable en el nodo junto con el error de validación cruzada
+printcp(action.rpart,digits=3)   
+
+#Se reduce el valor de cp como criterio de parada de cp=0.01 (defaut) a cp=0.001
+#para obtener un árbol con exceso de ramificaciones para después podarlo mediante la
+#regal 1-SE:
+action.rpart2 <- rpart(out_action ~ ., data=actionent, method="class",cp=0.001)
+
+action.rpart2
+plot(action.rpart2,main="CART datos action. CP=0.001",uniform=TRUE)
+text(action.rpart2,col="blue",cex=0.6)
+printcp(action.rpart2,digits=3)
+plotcp(action.rpart2)
+plotcp(action.rpart2,lty=2,upper="splits",col="blue")
+#Tabla con las estimaciones VC
+cptabla<- action.rpart2$cptable
+
+#Sobre el conjunto test
+ct2<-table(actiontest$out_action,predict(action.rpart2,actiontest,type="class"))
+ct2
+# Porcentaje correcto por grupos
+100*diag(prop.table(ct2, 1))
+# total porcentaje correcto
+TPC2 <- 100*sum(diag(prop.table(ct2)))
+TPC2
+
+#Regla 1-ES : tomamos el menor sub-árbol tal que el error de validación cruzada es
+#menor que el error de validación cruzada mínimo + su desviación típica
+
+#calcualamos el error de validación cruzada mínimo + su desviación típica
+CP1ES<- min(cptabla[,4])+cptabla[which.min(cptabla[,4]),5]
+CP1ES
+
+#localizamos el valor de CP del sub-árbol tal que el error de validación cruzada es
+#menor que el error de validación cruzada mínimo + su desviación típica
+indicp<- 1:nrow(cptabla)
+cprecorte<- cptabla[indicp[cptabla[,4]<CP1ES][1],1]
+cprecorte
+
+#Obtenemos el sub-árbol correspondiente a dicho CP mediante el recorte
+action.rpart3<-prune.rpart(action.rpart2,cp=cprecorte) 
+action.rpart3
+plot(action.rpart3,main="CART recortado",uniform=TRUE)
+text(action.rpart3,col="blue",cex=0.6)
+
+#Sobre el conjunto test
+ct3<-table(actiontest$out_action,predict(action.rpart3,actiontest,type="class"))
+ct3
+# Porcentaje correcto por grupos
+100*diag(prop.table(ct3, 1))
+# total porcentaje correcto
+TPC3 <- 100*sum(diag(prop.table(ct3)))
+TPC3
+
+
+
+#LA SIGUIENTE FUNCION PERMITE GENERAR LAS DISTINTAS REGLAS DE CLASIFICACION
+#A PARTIR DEL OBJETO RESULTANTE DE rpart
+
+list.rules.rpart <- function(model)
+{
+  if (!inherits(model, "rpart")) stop("No es una objeto rpart")
+  #
+  #
+  #
+  frm     <- model$frame
+  names   <- row.names(frm)
+  ylevels <- attr(model, "ylevels")
+  ds.size <- model$frame[1,]$n
+  #
+  # Print each leaf node as a rule.
+  #
+  numreglas=0
+  for (i in 1:nrow(frm))
+  {
+    if (frm[i,1] == "<leaf>")  #Nodos terminales
+    {
+      numreglas=numreglas+1
+      cat("\n")
+      cat(sprintf(" Regla número: %s (nodo %s) ", numreglas,names[i]))
+      cat(sprintf("[yval=%s cover=%d (%.0f%%) prob=%0.2f]\n",
+                  ylevels[frm[i,]$yval], frm[i,]$n,
+                  round(100*frm[i,]$n/ds.size), frm[i,]$yval2[,5]))
+      pth <- path.rpart(model, nodes=as.numeric(names[i]), print.it=FALSE)
+      cat(sprintf("   %s\n", unlist(pth)[-1]), sep="")
+    }
+  }
+}
+
+list.rules.rpart(action.rpart3)
+plot(action.rpart3,main="CART recortado",uniform=TRUE)
+text(action.rpart3,col="blue",cex=0.6)
+
+list.rules.rpart(action.rpart)
+plot(action.rpart,main="CART recortado",uniform=TRUE)
+text(action.rpart,col="blue",cex=0.6)
+
+
+#DIBUJAR EL ARBOL CON CON partykit
+library(partykit)
+
+rpart1 <- as.party(action.rpart)
+plot(rpart1) 
+#LA NUMERACION DE LOS NODOS PUEDE DIFERIR CON rpart
+#PARA ARBOLES GRANDES, COMO rpart3, NO SE APRECIA BIEN 
+
+#IMPORTANCIA DE LAS VARIABLES
+######################################
+
+#La variables más importantes son aquellas que contribuyen a disminuir la impureza
+#en mayor medida. Debido a la poca estabilidad de los modelos, se utiliza no sólo la
+#disminución de impureza de la variable cuando es elegida en un nodo, sino también
+#su contribución como variable sustituta.
+
+
+#Aparece en la salida de summary:
+#summary(action.rpart)
+#o bien
+cbind(action.rpart$variable.importance)
+```
+
+\subsection*{Modelo Random Forest}
+
+Modelo basado en Random Forests
+
+```{r RF, echo =TRUE}
+library(kernlab)
+library(randomForest)
+
+# Obtenemos el modelo RF sobre el conjunto de entrenamiento.
+# Tambien podríamos haber usado directamente data =actiontest y utillizar el
+#parametro subset para indicar que solo usaremos el subconjunto definido por los
+#indices de fila indient (subset= indient)
+
+#CONSTRUCCION DEL BOSQUE ALEATORIO
+#Se contruyen 500 Arboles y se obtiene la clasificacion mas votada. Cada uno de los
+#Arboles se contruyen eligiendo entre m=sqrt(16)=4 variables predictoras en cada
+#nodo  
+RF<- randomForest(out_action ~ ., data=actionent, importance=TRUE,do.trace=TRUE)
+RF
+plot(RF)
+
+# La muestras no utilizadas en los conjuntos bootstrap (Out of bag) se utilizan como
+#conjunto test para clacular el error del modelo.
+legend("topright",col=1:3,lty=1:3,
+       legend=c("OOB",levels(Rset$out_action)))
+grid()
+varImpPlot(RF)
+
+#Aqui obtenemos la importacia de la variable
+importancias=importance(RF)
+
+#Comparandolas con las del arbol3 de clasificacion, vemos que no coinciden 
+#exactamente las variables mas importantes. Esto es debido a la poca estabilidad de 
+#la solucion de calcular un unico Arbol (Arbol3)
+cbind(action.rpart$variable.importance)
+
+round(cbind(importancias[order(-importancias[,3]),3]),2)
+
+predictest<- predict(RF,newdata=Rset[-indient,], type="response")
+ctRF<-table(Rset[-indient,"out_action"],predictest)
+ctRF
+# ACIERTO POR GRUPOS
+100*diag(prop.table(ctRF, 1))
+# ACIERTO TOTAL
+TPCRF <- 100*sum(diag(prop.table(ctRF)))
+
+
+```
