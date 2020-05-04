@@ -282,6 +282,6 @@ ctRF
 100*diag(prop.table(ctRF, 1))
 # ACIERTO TOTAL
 TPCRF <- 100*sum(diag(prop.table(ctRF)))
-
+TPCRF
 
 ```

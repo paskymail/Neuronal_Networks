@@ -23,9 +23,11 @@
 ## Lunes 04/05
 ### Resultados
        1. El uso de la sequencia decalada mejora la precisión y evita el sobre aprendizaje para un mismo número de parámetros
+       2. Random forest: confusión selectiva entre ciertas acciones
 ### Acciones
         1. Usar un encoder-decoder para predecir N pasos
         2. Añadir embeddings para codificar las acciones
+        3. Redactar resultados de secuencial decalada usando information theory
 
 
 RNN con secuencia decalada
