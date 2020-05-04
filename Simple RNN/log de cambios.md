@@ -20,6 +20,13 @@
         2. Predecir la misma secuencia decalada de una unidad para predecir un paso
         3. Añadir embeddings para codificar las acciones
 
+## Lunes 04/05
+### Resultados
+       1. El uso de la sequencia decalada mejora la precisión y evita el sobre aprendizaje para un mismo número de parámetros
+### Acciones
+        1. Usar un encoder-decoder para predecir N pasos
+        2. Añadir embeddings para codificar las acciones
+
 
 RNN con secuencia decalada
 1 -> 2
