@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "C:\\Users\\pasky\\Miniconda3\\python.exe",
+    "python.pythonPath": "C:\\Users\\pasky\\Anaconda3\\python.exe",
     "python.linting.pylintEnabled": true,
     "python.condaPath":"C:\\Users\\pasky\\Anaconda3\\envs\\tf\\python.exe",
     "python.linting.enabled": true,
