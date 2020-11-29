@@ -2,13 +2,13 @@
 theme : "night"
 transition: "slide"
 highlightTheme: "monokai"
-logoImg: "./presentation/images/logo_US.png"
+logoImg: "./images/logo_US.png"
 slideNumber: false
 title: "Recurrent neural networks for ornithopter trajectory optimization"
 ---
 
 ::: block
-*Work in progress: Tutorial example to be replaced by TFM presentation* {style=background:red;width:500px}
+*Work in progress* {style=background:red;width:500px}
 ::: 
 
 ---
@@ -17,7 +17,7 @@ title: "Recurrent neural networks for ornithopter trajectory optimization"
 
  Recurrent neural networks for ornithopter trajectory optimization
 
- <img data-src="./presentation/images/logo_US.png">
+ <img data-src="./images/logo_US.png">
 
 <small>Supervisor: José Miguel Díaz Báñez / Candidate: Luis David Pascual Callejo</small>
 
@@ -41,6 +41,8 @@ title: "Recurrent neural networks for ornithopter trajectory optimization"
 1.  Propositions and basic results
     1.  Unfolding of RNN
     2.  Maximum likelihood method
+    3.  ML for the regression problem
+    4.  ML for the classification problem
 2.  RNN implementation
 3.  Results
 
@@ -48,13 +50,13 @@ title: "Recurrent neural networks for ornithopter trajectory optimization"
 
 ## 1. Ornithopter trajectory optimization problem
 
-<img data-src="./presentation/images/ornithopter.jpg" width="40%">
+<img data-src="./images/ornithopter.jpg" width="40%">
 
 ---
 
 ### 1.1 Problem statement
 
-<img data-src="./presentation/images/trajectories.png" width="40%">
+<img data-src="./images/trajectories.png" width="40%">
 
 > <small>The problem we want to solve is to compute an optimal trajectory of an ornithopter connecting two given positions A and B while minimizing the energy consumption</small>
 
@@ -69,8 +71,9 @@ However it is too slow to be embarked on the ornithopter for inline path computa
 
 ### 1.3 The RNN approach
 
-> Our proposition is to use recurrent neuronal networks to contour this problem.
-The neuronal network is tasked with learning the underlying optimal trajectory flight dynamics, which are in turn numerically estimated by OSPA.
+> **Proposition:** contour this problem using recurrent neuronal networks.
+
+The neuronal network is tasked with learning the underlying optimal trajectory flight dynamics, which are in turn numerically estimated by the OSPA.
 
 
 --
@@ -89,15 +92,20 @@ More precisely, OSPA is used to compute a set of optimal trajectories for the or
 
 ### 2.1 Feedforward neural networks
 
-<img data-src="./presentation/images/NN_schema.png">
+<img data-src="./images/NN_schema.png">
 
 --
 
 ### 2.1 Feedforward NN algebraic equations
 
-<img data-src="./presentation/images/Neuron_diagram.png" width="40%">
-<small>$$a_i^k = b_i^k + \sum_{j = 1}^{r_{k-1}} w_{ji}^k o_j^{k-1} = \sum_{j = 0}^{r_{k-1}} w_{ji}^k o_j^{k-1}$$ 
-$$o_i^k = g(a_i^k)$$
+<img data-src="./images/Neuron_diagram.png" width="40%">
+<small>
+<span>
+\[\begin{aligned}
+&a_i^k = b_i^k + \sum_{j = 1}^{r_{k-1}} w_{ji}^k o_j^{k-1} = \sum_{j = 0}^{r_{k-1}} w_{ji}^k o_j^{k-1}\\
+&o_i^k = g(a_i^k)
+\end{aligned} \]
+</span>
 </small>
 ---
 
@@ -133,13 +141,16 @@ This is true since a continuous function on a closed and bounded subset of $R^N$
 
 ### 2.4 NN architecture
 
-The neuronal network architecture and activation functions define the capacity the parametric family $ \{f^*(\cdot \,;\theta )\mid \theta \in \Theta \}$. 
+The neuronal network architecture and activation functions define the capacity the parametric family 
+$$\{f^\ast(\cdot \,;\theta )\mid \theta \in \Theta \}$$ 
 
+<small>
+The capacity is determined by:
 
-
-<small>The capacity is determined by:
 * Depth and width of the network: they will define the number of parameters available.
-* Activation functions and general architecture: they will define the set of functions that can be learned by the NN.</small>
+* Activation functions and general architecture: they will define the set of functions that can be learned by the NN.
+</small>
+
 
 --
 
@@ -147,22 +158,28 @@ The neuronal network architecture and activation functions define the capacity t
 
 Due to the complexity of the ornithopter problem, our NN architecture must have the capacity to capture temporal dynamic behaviors.
 
-> **Proposition:** it is proposed to use a recurrent neural network with just one single layer to learn the OSPA underlaying trajectory flight dynamics 
+> **Proposition:**  use a recurrent neural network with just one single layer to learn the OSPA underlaying trajectory flight dynamics 
 
 ---
 
 ### 2.5 Recurrent Neural networks
 
+<small>
 A recurrent neural network (RNN) is a class of artificial neural networks where connections between nodes form a directed graph along a temporal sequence. These connections allow previous outputs to be used as inputs while having hidden states.
-
+</small>
 --
 
 ### 2.5 Recurrent Neural networks
 
-<img data-src="./presentation/images/RNN gates.png" width="40%">
-$$a_t =g_1( b_a + W_{aa}a_{t-1}+W_{ax}x_t)$$
-$$y_t = g_2(b_y + W_{ya}a_t)$$
-
+<img data-src="./images/RNN gates.png" width="50%">
+<small>
+<span>
+\[\begin{aligned}
+&a_t =g_1( b_a + W_{aa}a_{t-1}+W_{ax}x_t) \\
+&y_t = g_2(b_y + W_{ya}a_t)
+\end{aligned} \]
+</span>
+</small>
 ---
 
 ## 3. Propositions and basic results
@@ -171,564 +188,150 @@ $$y_t = g_2(b_y + W_{ya}a_t)$$
 
 ## 3.1 RNN unfolding
 
-<img data-src="./presentation/images/RNN architecture.png">
+<img data-src="./images/RNN architecture.png">
+
+---
+
+## 3.1 RNN unfolding
+<small>
+
+> **Theorem:** the unfolding property can only be applied if the following hypothesis is met: the conditional probability distribution over the variables at t+1 given the variables at time t, is stationary.
+</small>
+--
+
+### 3.1 RNN unfolding
+
+> <small>Therefore the RNN can be virtually considered as a feedforward NN and the results seen in [1](#/1) and [2](#/3) are still valid.</small>
+ 
+<small>This is true since for every tuple of starting and target points, it is expected to obtain the same optimal trajectory.  Therefore, considering the starting point as an intermediate point at time t of a longer trajectory with same target point,the following intermediary points are expected to be same.</small>
+
+---
+
+## 3.2 Maximum likelihood
+
+<img data-src="./images/ML concept.png">
 
 ---
 
 
-## Maximum likelihood to estimate optimal parameters
+### 3.2 ML to estimate optimal parameters
+<small>
+Now that our family is defined, we need to compute the parameters $\theta$ so to obtain the best approximate $f^{\ast}(x;\hat{\theta})$ to the true underlying function $f$.
 
-The ML is proposed to estimate the parameter value $\hat{\theta}$ for a given family, so that under the assumed model $f^{\ast}(x;\hat{\theta})$, the observed data is the most probable. 
 
-The goal is to obtain the best approximate $f^{\ast}(x;\hat{\theta})$ to the true underlying function $f$. 
-
----
-
-## Markdown support
-
-```
-  ## Markdown support
-
-  Write content using inline or external Markdown.
-  Instructions and more info available in the 
-  [readme](https://github.com/hakimel/reveal.js#markdown).
-```
-
----
-
-## Fragments
-
-Hit the next arrow...
-
-... to step through ...
-<span class="fragment">... a</span> <span class="fragment">fragmented</span> <span class="fragment">slide.</span>
-
-Note:
-This slide has fragments which are also stepped through in the notes window.
-
+> **Proposition:** the ML method is proposed to estimate the parameter value $\hat{\theta}$ for a given family, so that under the assumed model $f^{\ast}(x;\hat{\theta})$, the observed data is the most probable. 
+</small>
 --
 
-## Fragment Styles
+### 3.2 ML to estimate optimal parameters
 
-There's different types of fragments, like:
-
-grow {.fragment .grow}
-
-shrink {.fragment .shrink}
-
-fade-out {.fragment .fade-out}
-
-fade-right{.fragment .fade-right}
-
-fade-up{.fragment .fade-up}
-
-fade-down{.fragment .fade-down}
-
-fade-left{.fragment .fade-left}
-
---
-
-## Fragment Styles
-
-fade-in-then-out{.fragment .fade-in-then-out}
-
-fade-in-then-semi-out {.fragment .fade-in-then-semi-out"}
-
-current-visible {.fragment .current-visible}
-
-Highlight **red**{.fragment .highlight-red} **blue**{.fragment .highlight-blue} **green**{.fragment .highlight-green}
-
----
-
-## Transition Styles
-
-You can select from different transitions, like:
-[None](?transition=none#/transitions) - [Fade](?transition=fade#/transitions) - [Slide](?transition=slide#/transitions) - [Convex](?transition=convex#/transitions) - [Concave](?transition=concave#/transitions) - [Zoom](?transition=zoom#/transitions)
-
----
-
-## Themes
-
-reveal.js comes with a few themes built in:
-<a href="#" onclick="document.getElementById('theme').setAttribute('href','libs/reveal.js/3.8.0/css/theme/black.css'); return false;">Black (default)</a> -
-<a href="#" onclick="document.getElementById('theme').setAttribute('href','libs/reveal.js/3.8.0/css/theme/white.css'); return false;">White</a> -
-<a href="#" onclick="document.getElementById('theme').setAttribute('href','libs/reveal.js/3.8.0/css/theme/league.css'); return false;">League</a> -
-<a href="#" onclick="document.getElementById('theme').setAttribute('href','libs/reveal.js/3.8.0/css/theme/sky.css'); return false;">Sky</a> -
-<a href="#" onclick="document.getElementById('theme').setAttribute('href','libs/reveal.js/3.8.0/css/theme/beige.css'); return false;">Beige</a> -
-<a href="#" onclick="document.getElementById('theme').setAttribute('href','libs/reveal.js/3.8.0/css/theme/simple.css'); return false;">Simple</a> <br>
-<a href="#" onclick="document.getElementById('theme').setAttribute('href','libs/reveal.js/3.8.0/css/theme/serif.css'); return false;">Serif</a> -
-<a href="#" onclick="document.getElementById('theme').setAttribute('href','libs/reveal.js/3.8.0/css/theme/blood.css'); return false;">Blood</a> -
-<a href="#" onclick="document.getElementById('theme').setAttribute('href','libs/reveal.js/3.8.0/css/theme/night.css'); return false;">Night</a> -
-<a href="#" onclick="document.getElementById('theme').setAttribute('href','libs/reveal.js/3.8.0/css/theme/moon.css'); return false;">Moon</a> -
-<a href="#" onclick="document.getElementById('theme').setAttribute('href','libs/reveal.js/3.8.0/css/theme/solarized.css'); return false;">Solarized</a>
-
----
-
-<!-- .slide: data-background="#dddddd" -->
-## Slide Backgrounds
-
-Set `data-background="#dddddd"` on a slide to change the background color. All CSS color formats are supported.
-
-[![Down arrow](https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png =178x238)](#){.navigate-down}
-
-
---
-
-<!-- .slide: data-background="default-thumbnail.jpg" -->
-
-## Image Backgrounds
-
-```markdown
-<!-- .slide: data-background="default-thumbnail.jpg" -->
-```
-
---
-
-<!-- .slide: data-background="default-thumbnail.jpg" data-background-repeat="repeat" data-background-size="100px" -->
-
-## TILED BACKGROUNDS
-
-```markdown
-<!-- .slide: data-background="default-thumbnail.jpg" data-background-repeat="repeat" data-background-size="100px" -->
-```
-
---
-
-<!-- .slide: data-background-video="https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.mp4,https://s3.amazonaws.com/static.slid.es/site/homepage/v1/homepage-video-editor.webm" data-background-color="#000000" -->
-
-## Video Backgrounds
-
-```markdown
-<!-- .slide: data-background-video="https://upload.wikimedia.org/wikipedia/commons/transcoded/c/c0/Big_Buck_Bunny_4K.webm/Big_Buck_Bunny_4K.webm.480p.vp9.webm" data-background-color="#000000" -->
-```
-
---
-
-<!-- .slide: data-background="http://i.giphy.com/90F8aUepslB84.gif" -->
-
-## ... and GIFs!
-
-```markdown
-<!-- .slide: data-background="http://i.giphy.com/90F8aUepslB84.gif" -->
-```
-
----
-
-<!-- .slide: data-transition="slide" data-background="#4d7e65" data-background-transition="zoom" -->
-
-## Background Transitions
-
-Different background transitions are available via the backgroundTransition option. This one's called "zoom".
-
----
-
-<!-- .slide: data-transition="slide" data-background="#b5533c" data-background-transition="zoom" -->
-
-## Background Transitions
-
-You can override background transitions per-slide.
-
----
-
-## Pretty Code
-
-```js
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) {
-        node.className += ' roll';
-      }
-    }
-  }
-}
-```
-
-Code syntax highlighting courtesy of [highlight.js](http://softwaremaniacs.org/soft/highlight/en/description/).
-
----
-
-## Marvelous List
-
-*   No order here
-*   Or here
-*   Or here
-*   Or here
-
----
-
-## Fantastic Ordered List
-
-1.  One is smaller than...
-2.  Two is smaller than...
-3.  Three!
-
----
-
-## Tabular Tables
-
-| Tables        | Are           | Cool  |
-|-------------|:-----------:|----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      | $12   |
-| zebra stripes | are neat      | $1    |
-
----
-
-## Clever Quotes
-
-These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">"The nice thing about standards is that there are so many to choose from"</q> and block:
-
-> "For years there has been a theory that millions of monkeys typing at random on millions of typewriters would reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue."
-
----
-
-## Intergalactic Interconnections
-
-You can link between slides internally, [like this](#/2/3).
-
----
-
-## Speaker View
-
-There's a [speaker view](https://github.com/hakimel/reveal.js#speaker-notes). It includes a timer, preview of the upcoming slide as well as your speaker notes.
-
-Press the _S_ key to try it out.
-
-<aside class="notes">Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).</aside>
-
----
-
-## Export to PDF
-
-Presentations can be [exported to PDF](https://github.com/hakimel/reveal.js#pdf-export), here's an example:
-
-<iframe data-src="https://www.slideshare.net/slideshow/embed_code/42840540" width="445" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen=""></iframe>
-
----
-
-## Global State
-
-Set `data-state="something"` on a slide and `"something"` will be added as a class to the document element when the slide is open. This lets you apply broader style changes, like switching the page background.
-
----
-
-<!-- .slide: data-state="customevent" -->
-
-## State Events
-
-Additionally custom events can be triggered on a per slide basis by binding to the `data-state` name.
-```js
-Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-```
-
----
-
-## Take a Moment
-
-Press B or . on your keyboard to pause the presentation. This is helpful when you're on stage and want to take distracting slides off the screen.
-
----
-
-## Much more
-
-*   Right-to-left support
-*   [Extensive JavaScript API](https://github.com/hakimel/reveal.js#api)
-*   [Auto-progression](https://github.com/hakimel/reveal.js#auto-sliding)
-*   [Parallax backgrounds](https://github.com/hakimel/reveal.js#parallax-background)
-*   [Custom keyboard bindings](https://github.com/hakimel/reveal.js#keyboard-bindings)
-
----
-
-## Plugins
-
---
-
-## search
-
-Handles finding a text string anywhere in the slides and showing the next occurrence to the user by navigatating to that slide and highlighting it.
-
-**Shortcut : `CTRL + SHIFT + F`**
-
-
---
-
-## Zoom
-
-Zoom anywhere on your presentation
-
-**Shortcut : `alt + click`: Zoom in. Repeat to zoom back out.**
-
---
-
-## Notes
-
-Add note to speaker view.
-
-Default markdown syntaxe is
-
-```text
-note: a custom note here
-```
-
---
-
-## Chalkboard
-
-Have you ever missed the traditional classroom experience where you can quickly sketch something on a chalkboard?
-
-Just press 'b' or click on the pencil button to open and close your chalkboard.
-
---
-
-## Chalkboard
-
-- Click the `left mouse button` to write on the chalkboard
-- Click the `right mouse button` to wipe the chalkboard
-- Click the `DEL` key to clear the chalkboard
-
---
-
-## MAKE NOTES ON SLIDES
-
-Did you notice the <i class="fa fa-pencil"></i> button?
-
-By pressing 'c' or clicking the button you can start and stop the notes taking mode allowing you to write comments and notes directly on the slide.
-
---
-
-## Chart
-
-Add chart from simple string
-
---
-
-### Line chart from JSON string
-<canvas class="stretch" data-chart="line">
-<!--
-{
- "data": {
-  "labels": ["January"," February"," March"," April"," May"," June"," July"],
-  "datasets":[
-   {
-    "data":[65,59,80,81,56,55,40],
-    "label":"My first dataset","backgroundColor":"rgba(20,220,220,.8)"
-   },
-   {
-    "data":[28,48,40,19,86,27,90],
-    "label":"My second dataset","backgroundColor":"rgba(220,120,120,.8)"
-   }
-  ]
- }, 
- "options": { "responsive": "true" }
-}
--->
-</canvas>
-
---
-
-### Line chart with CSV data and JSON configuration
-
-<canvas class="stretch" data-chart="line">
-My first dataset,  65, 59, 80, 81, 56, 55, 40
-<!-- This is a comment -->
-My second dataset, 28, 48, 40, 19, 86, 27, 90
-<!-- 
-{ 
-"data" : {
-	"labels" : ["Enero", "Febrero", "Marzo", "Avril", "Mayo", "Junio", "Julio"],
-	"datasets" : [{ "borderColor": "#0f0", "borderDash": ["5","10"] }, { "borderColor": "#0ff" } ]
-	}
-}
--->
-</canvas>
-
---
-
-### Bar chart with CSV data
-
-<canvas class="stretch" data-chart="bar">
-,January, February, March, April, May, June, July
-My first dataset, 65, 59, 80, 81, 56, 55, 40
-My second dataset, 28, 48, 40, 19, 86, 27, 90
-</canvas>
-
---
-
-### Stacked bar chart from CSV file with JSON configuration
-<canvas class="stretch" data-chart="bar" data-chart-src="https://rajgoel.github.io/reveal.js-demos/chart/data.csv">
-<!-- 
-{
-"data" : {
-"datasets" : [{ "backgroundColor": "#0f0" }, { "backgroundColor": "#0ff" } ]
-},
-"options": { "responsive": true, "scales": { "xAxes": [{ "stacked": true }], "yAxes": [{ "stacked": true }] } }
-}
--->
-</canvas>
-
---
-
-### Pie chart
-
-<canvas class="stretch" data-chart="pie">
-,Black, Red, Green, Yellow
-My first dataset, 40, 40, 20, 6
-My second dataset, 45, 40, 25, 4
-</canvas>
-
---
-
-## EMBEDDING A TWEET
-To embed a tweet, simply determine its URL and include the following code in your slides:
-
-```html
-<div class="tweet" data-src="TWEET_URL"></div>
-```
-
---
-
-<div class="tweet"  data-src="https://twitter.com/Evilznet/status/1086984843056107525"></div>
-
---
-
-## menu
-
-A SLIDEOUT MENU FOR NAVIGATING REVEAL.JS PRESENTATIONS
-
---
-
-See the  <i class="fa fa-bars"></i>  in the corner?
-
-Click it and the menu will open from the side.
-
-Click anywhere on the slide to return to the presentation,
-or use the close button in the menu.
-
---
-
-If you don't like the menu button,
-you can use the slide number instead.
-
-Go on, give it a go.
-
-The menu button can be hidden using the options, 
-but you need to enable the slide number link.
-
---
-
-Or you can open the menu by pressing the m key.
-
-You can navigate the menu with the keyboard as well. 
-Just use the arrow keys and <space> or <enter> to change slides.
-
-You can disable the keyboard for the 
-menu in the options if you wish.
-
---
-
-## LEFT OR RIGHT
-You can configure the menu to slide in from the left or right
-
---
-
-### MARKERS
-The slide markers in the menu can be useful to show 
-you the progress through the presentation.
-
-You can hide them if you want.
-
-You can also show/hide slide numbers.
-
---
-
-### SLIDE TITLES
-The menu uses the first heading to label each slide
-but you can specify another label if you want.
-
-Use a data-menu-title attribute in the section element to give the slide a custom label, or add a menu-title class to any element in the slide you wish.
-
-You can change the titleSelector option and use
-any elements you like as the default for labelling each slide.
-
---
-
-## MathSVG
-
-An extension of the math.js plugin allowing to render LaTeX in SVG.
-
---
-
-### The Lorenz Equations
-
-<span>
-\[\begin{aligned}
-\dot{x} &amp; = \sigma(y-x) \\
-\dot{y} &amp; = \rho x - y - xz \\
-\dot{z} &amp; = -\beta z + xy
-\end{aligned} \]
-</span>
-
---
-
-### The Cauchy-Schwarz Inequality
+> <small> **Definition:** Consider a set of $m$ examples $X ={x^1,...,x^m} $ drawn independently from the true but unknown data generating distribution $p_{data}(x)$. Let  $p_{model}(X; \theta)$ be a parametric family of probability distributions over the same space indexed by $\theta$. The maximum likelihood estimator for $\theta$ is then deﬁned as: 
 
 <script type="math/tex; mode=display">
-  \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)
+  \theta_{ML} =  \arg\max_{\theta}  p_{model}(X;\theta) = \arg\max_{\theta}
+\prod_{i=1}^m p_{model}(x_i ;\theta)
 </script>
 
---
-
-### Custom footer
-
-Includes a footer in all the slides of a Reveal.js presentation (with optional exclusion of some slides) that will show the title of the presentation.
-
-
-
---
-
-## code-focus
-
-A plugin that allows focusing on specific lines of code blocks.
-
---
-
-### Code Focus Demo
-
-
-```html
-<section>
-  <pre><code>
-  // Useless comment.
-  alert('hi');
-  </pre></code>
-  <p class="fragment" data-code-focus="1">
-    This focuses on the comment.
-  </p>
-  <p class="fragment" data-code-focus="1-2">
-    Another fragment.
-  </p>
-</section>
-```
-
-This section is a slide. {.fragment .current-only data-code-focus=1-12}
-
-This will be highlighted by `highlight.js`. {.fragment .current-only data-code-focus=2-5}
-
-This fragment focuses on the first line. {.fragment .current-only data-code-focus=6-8}
-
-This fragment focuses on lines 1 and 2. {.fragment .current-only data-code-focus=9-11}
-
-See the next slide for a demo with the contents of this code block. {.fragment .current-only data-code-focus=1-12}
+</small>
 
 ---
 
-<!-- .slide: style="text-align: left;" -->
-# THE END
+### 3.3 Regression problem
+
+<small>
+In the regression problem, the RNN aims to output the best possible approximation to the values of the true states in $R^6$ given by an OSPA trajectory.
+
+$$y_i = \hat{y_i} + e_i$$
+
+where  $\hat{y_i}$ is our prediction, $y_i$ is the real value and $e_i$ is the error due to non modeled aspects which is assumed to be Gaussian
+</small>
+
+--
+
+## 3.3.1 Mean squared Error
+
+> <small> **Proposition:** given the above mentioned hypothesis, it is equivalent to use the Log Likelihood or the Mean Squared Error as loss functions for our NN.
+
+<script type="math/tex; mode=display">
+   \theta_{ML} =  \arg\max_{\theta} L= \arg\max_{\theta}m\log\frac {1}{\sigma {\sqrt {2\pi }}}-\sum_{i=1}^m {\frac {1}{2}}\left({\frac {y_i - \hat{y_i}  }{\sigma }}\right)^{2} = \arg\max_{\theta}\sum_{i=1}^m {\frac {1}{2}}\left({y_i - \hat{y_i}  }\right)^{2}
+</script>
+
+</small>
+
+--
+
+### 3.3.2 KL Divergence
+
+> <small> **Proposition:**  It is equivalent to use the Log-likelihood or the KL divergence as loss functions to compute the optimal parameters for our NN regression problem. 
+
+<script type="math/tex; mode=display">
+   \displaystyle D_{\text{KL}}(p_{data}\parallel p_{model})=-H_{p_{data}} - L(x;\theta)
+</script>
+
+</small>
+
+---
+
+### 3.3.2 KL Divergence
+
+<small>
+The KL divergence loss function represents the amount of information lost when $p_{model}$ is used to approximate $p_{data}$.
+
+Or in other words, when our neural network $f^{\ast}(x;\hat{\theta})$ is used instead of the real source of data, which is our OSPA planner.
+</small>
+---
+
+### 3.4 Classification problem
+<small>
+The ornithopter possible action data set is actually a finite set of 35 different action tuples. This is due to the methodology of the OSPA to compute the optimal path, which requires a finite set of possible action outcomes in order to obtain a search tree.
+
+In the classification model each action $a_k$ is treated as a different category, leading to 35 different categories: $$a_k = (\delta_k, f_k), \ k =1,..., 35$$
+
+</small>
+--
+
+### 3.3 Classification problem
+
+<small>
+In this case, we want the RNN to output the probability that each category has to be selected:
+ $$\hat{y_k} = p(y_k|x,\theta)$$
+where $\hat{y_k}$ is the vector with the predicted probabilities for each category $k$ and $y_k$ is the "one hot" representation of each category
+</small>
+
+--
+
+### 3.4.1 Cross Entropy
+
+> <small> **Proposition:** It is equivalent to use the Log-likelihood or the CategoricalCross Entropy as loss function for our NN classification problem. 
+
+<script type="math/tex; mode=display">
+   \theta_{ML} =  \arg\max_{\theta} \sum_{i=1}^m \log p(y|x_i ;\theta)= \arg\max_{\theta} - \sum_{i=1}^m H(p(y_i), \hat{y}_i)
+</script>
+
+</small>
+
+--
+
+### 3.4.1 Cross Entropy
+
+<small>
+The cross entropy loss function can be interpreted as the expected message-length per datum when a wrong distribution $p_{model}$ is assumed while the data actually follows a distribution $p_{data}$.
+
+Or in other words, when our neural network $f^{\ast}(x;\hat{\theta})$ is used instead of the real source of data, which is our OSPA planner.
+</small>
+
+--
+
+### 3.4.2 KL Divergence
+
+> <small> **Proposition:**  It is equivalent to use the Log-likelihood or the KL divergence as loss functions to compute the optimal parameters for our NN classification problem. 
+
+<script type="math/tex; mode=display">
+   \displaystyle D_{\text{KL}}(p(y)\parallel \hat{y})=-H_{y} + H_{y\hat{y}}(x;\theta)
+</script>
+
+</small>
+
+---
+
+# Questions?
