@@ -4,6 +4,7 @@
     "python.condaPath":"C:\\Users\\pasky\\Anaconda3\\envs\\tf\\python.exe",
     "python.linting.enabled": true,
     "spellright.language": [
+        "en",
         "es"
     ],
     "spellright.documentTypes": [
