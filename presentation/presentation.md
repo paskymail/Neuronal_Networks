@@ -1,8 +1,8 @@
 ---
-theme : "night"
+theme : "Black"
 transition: "slide"
 highlightTheme: "monokai"
-logoImg: "./images/logo_US.png"
+logoImg: "./images/QR paskymailweb.png"
 slideNumber: false
 title: "Recurrent neural networks for ornithopter trajectory optimization"
 ---
@@ -34,23 +34,43 @@ title: "Recurrent neural networks for ornithopter trajectory optimization"
     3.  Universal Approximator theorem
     4.  Neural Network architecture
     5.  Recurrent Neural Network
+
 --
 
 ## Overview
 
-1.  Propositions and basic results
+3.  Propositions and basic results
     1.  Unfolding of RNN
     2.  Maximum likelihood method
     3.  ML for the regression problem
     4.  ML for the classification problem
-2.  RNN implementation
-3.  Results
+4.  RNN implementation
+    1.  Data pre-processing
+    2.  Output layer
+        1.  Classification
+        2.  Regression
+
+--
+
+## Overview
+
+
+5.  Results
+    1. Action classification model
+    2. Sequence to sequence model
+    3. Decoder model
+    4. ODE integrator model
+6. Conclusions  
+
 
 ---
+
+<!-- .slide: data-transition="slide" data-background="#4d7e65" data-background-transition="zoom" -->
 
 ## 1. Ornithopter trajectory optimization problem
 
 <img data-src="./images/ornithopter.jpg" width="40%">
+
 
 ---
 
@@ -85,6 +105,10 @@ More precisely, OSPA is used to compute a set of optimal trajectories for the or
 > The goal is to obtain similar performances to the heuristic method with much faster computation times.
 
 ---
+
+<!-- .slide: data-transition="slide" data-background="#4e4d7e" data-background-transition="zoom" -->
+
+
 
 ## 2. Neural Networks preliminaries
 
@@ -127,7 +151,7 @@ where the family $f^*(\cdot \,;\theta)$ is given by the NN architecture and the 
 
 ### 2.3 Universal approximator theorem
 
-> <small>**Theorem:** feedforward networks with a linear output layer and at least one hidden layer with any continuous squashing function can approximate any Borel measurable function from one finite-dimensional space to another with any desired non-zero amount of error, provided that the network is given enough hidden units.</small>
+> **Theorem:** feedforward networks with a linear output layer and at least one hidden layer with any continuous squashing function can approximate any Borel measurable function from one finite-dimensional space to another with any desired non-zero amount of error, provided that the network is given enough hidden units.
 
 --
 
@@ -144,12 +168,10 @@ This is true since a continuous function on a closed and bounded subset of $R^N$
 The neuronal network architecture and activation functions define the capacity the parametric family 
 $$\{f^\ast(\cdot \,;\theta )\mid \theta \in \Theta \}$$ 
 
-<small>
 The capacity is determined by:
 
 * Depth and width of the network: they will define the number of parameters available.
 * Activation functions and general architecture: they will define the set of functions that can be learned by the NN.
-</small>
 
 
 --
@@ -164,9 +186,7 @@ Due to the complexity of the ornithopter problem, our NN architecture must have 
 
 ### 2.5 Recurrent Neural networks
 
-<small>
 A recurrent neural network (RNN) is a class of artificial neural networks where connections between nodes form a directed graph along a temporal sequence. These connections allow previous outputs to be used as inputs while having hidden states.
-</small>
 --
 
 ### 2.5 Recurrent Neural networks
@@ -181,6 +201,8 @@ A recurrent neural network (RNN) is a class of artificial neural networks where 
 </span>
 </small>
 ---
+
+<!-- .slide: data-transition="slide" data-background="#e3be29" data-background-transition="zoom" -->
 
 ## 3. Propositions and basic results
 
@@ -248,7 +270,7 @@ where  $\hat{y_i}$ is our prediction, $y_i$ is the real value and $e_i$ is the e
 
 --
 
-## 3.3.1 Mean squared Error
+### 3.3.1 Mean squared Error
 
 > <small> **Proposition:** given the above mentioned hypothesis, it is equivalent to use the Log Likelihood or the Mean Squared Error as loss functions for our NN.
 
@@ -270,7 +292,7 @@ where  $\hat{y_i}$ is our prediction, $y_i$ is the real value and $e_i$ is the e
 
 </small>
 
----
+--
 
 ### 3.3.2 KL Divergence
 
@@ -290,7 +312,7 @@ In the classification model each action $a_k$ is treated as a different category
 </small>
 --
 
-### 3.3 Classification problem
+### 3.4 Classification problem
 
 <small>
 In this case, we want the RNN to output the probability that each category has to be selected:
@@ -334,4 +356,146 @@ Or in other words, when our neural network $f^{\ast}(x;\hat{\theta})$ is used in
 
 ---
 
-# Questions?
+<!-- .slide: data-transition="slide" data-background="#b5533c" data-background-transition="zoom" -->
+
+## 4. RNN implementation
+
+---
+
+### 4.1 data pre-processing
+
+1. From states to state distances: 
+$$x_i = s_{target} - s_i$$
+2. Data normalization:  
+$$x_i = \frac{z_i }{\sigma}$$
+3. Append target point to the trajectory
+$$\vec{x}.append(x_{target})$$
+--
+
+### 4.1 data pre-processing
+
+* Data truncation and padding
+
+  <img data-src="./images/Padding.png">
+
+---
+
+
+### 4.2 output layer
+
+---
+
+### 4.2.1 classification output layer
+
+The output layer consists on a dense layer with a softmax activation function
+
+  <img data-src="./images/Output classif.png" width = "60%">
+
+It transforms the output into the probability of predicting each specific class
+
+--
+
+### 4.2.1 classification output layer
+
+> **Proposition:** If we assume that $p(x|y^k=1)$ follows a Gaussian, a softmax function is capable of estimating the probabilities of obtaining each of the categories using Bayes theorem
+
+<script type="math/tex; mode=display">
+   p(y^k= 1|x)=\frac{p(x|y^k = 1)p(y^k = 1)}{p(x)}=\frac{e^{-z_k(x; \theta)}}{\sum_{j=1}^Ne^{-z_j(x; \theta)} }
+</script>
+
+---
+
+### 4.2.2 regression output layer
+
+The output layer consists on a dense layer with a linear activation function
+
+  <img data-src="./images/Output regression.png" width = "50%">
+
+It transforms the output into the estimated value of each component
+
+
+---
+
+<!-- .slide: data-transition="slide" data-background="#3cb1b5" data-background-transition="zoom" -->
+
+## 5. Results
+
+
+---
+
+### 5.1 action classification model
+
+ <img data-src="./images/S2A step.png">
+
+--
+
+### 5.1.1 action classification model
+
+<section style="text-align: left;">
+The configuration is as follows:
+
+* Input layer: last predicted state $x_{t-1}$
+* The recurrent layer: is expected to learn the function $h_{t} = f(h_{t-1}; x_{t-1})$
+* Output layer: probabilities for the next action to apply a_{t}. 
+* Fixed function: $x_t=F(x_{t-1};a_t)$
+
+</section>
+
+--
+
+### 5.1.1 action classification model
+
+Network summary
+
+| Layer        | Output shape           |  parameter number   |
+|-------------|:-----------:|:----:|
+| LSTM      | [None, None, 11] | 792 |
+| Dense      | [None, None, 35]       | 420   |
+| Lambda      | [None, None, 6]       | 0   |
+
+---
+
+### 5.1.2 action classification training
+
+ We use the KL divergence loss function as the measure of the dissimilarity between these two distributions
+$$\displaystyle D_{\text{KL}}(p_{data}\parallel p_{model})=\sum_{x\in {\mathcal{X}}}p(a|x)\log \left({\frac {p(a|x)}{p(a|x;\theta)}}\right)$$
+ to estimate $\hat{a} = p(a|x;\theta)$ as close as possible to the true action category value $p(a|x)$.
+
+--
+
+### 5.1.2 action classification training
+
+<img data-src="./images/S2A loss curve.png">
+
+---
+
+### 5.1.3 action classification results
+
+<img data-src="./images/S2A trajectory.png" width = 45%>
+<img data-src="./images/S2A trajectory components.png" width = 45%>
+
+--
+
+### 5.1.3 action classification results
+
+Results summary
+
+| Algorithm  | Cost (W)    | Time (s)    | Precision (m)   | Trajectory error (m)   |
+|-------------|:-----------:|:----:|:----:|:----:|
+| OSPA     | 34.68 | 520  |2.84 | N/A |
+| Action prediction  |  37.25  |  0.43  | 6.29 |  3.85 |
+
+
+---
+
+### 5.3 Decoder model
+
+ <img data-src="./images/Decoder.png">
+
+---
+
+### 5.4 ODE integrator model
+
+ <img data-src="./images/ODE.png">
+
+---

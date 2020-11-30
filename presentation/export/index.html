@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="libs/reveal.js/font-awesome-4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="libs/reveal.js/3.8.0/css/reveal.css">
   
-  <link rel="stylesheet" href="libs/reveal.js/3.8.0/css/theme/night.css" id="theme">
+  <link rel="stylesheet" href="libs/reveal.js/3.8.0/css/theme/Black.css" id="theme">
   
   
   <link rel="stylesheet" href="libs/reveal.js/3.8.0/plugin/title-footer/title-footer-mod.css" />
@@ -264,7 +264,7 @@
 <body>
   
 <div id="logo" style="position: fixed; top: 20px; left: 20px; z-index: 1">
-    <img src="./images/logo_US.png" />
+    <img src="./images/QR paskymailweb.png" />
 </div>
 
 
@@ -327,7 +327,7 @@
         
             <section >
                 <h2><a id="user-content-overview-1" class="anchor" href="#overview-1" aria-hidden="true"></a>Overview</h2>
-<ol>
+<ol start="3">
 <li>Propositions and basic results
 <ol>
 <li>Unfolding of RNN</li>
@@ -336,8 +336,33 @@
 <li>ML for the classification problem</li>
 </ol>
 </li>
-<li>RNN implementation</li>
-<li>Results</li>
+<li>RNN implementation
+<ol>
+<li>Data pre-processing</li>
+<li>Output layer
+<ol>
+<li>Classification</li>
+<li>Regression</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+            </section>
+        
+            <section >
+                <h2><a id="user-content-overview-2" class="anchor" href="#overview-2" aria-hidden="true"></a>Overview</h2>
+<ol start="5">
+<li>Results
+<ol>
+<li>Action classification model</li>
+<li>Sequence to sequence model</li>
+<li>Decoder model</li>
+<li>ODE integrator model</li>
+</ol>
+</li>
+<li>Conclusions</li>
 </ol>
 
             </section>
@@ -349,9 +374,10 @@
 
 
     
-        <section >
+        <section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
             
-            <h2><a id="user-content-1-ornithopter-trajectory-optimization-problem" class="anchor" href="#1-ornithopter-trajectory-optimization-problem" aria-hidden="true"></a>1. Ornithopter trajectory optimization problem</h2>
+            <!-- .slide: data-transition="slide" data-background="#4d7e65" data-background-transition="zoom" -->
+<h2><a id="user-content-1-ornithopter-trajectory-optimization-problem" class="anchor" href="#1-ornithopter-trajectory-optimization-problem" aria-hidden="true"></a>1. Ornithopter trajectory optimization problem</h2>
 <img data-src="./images/ornithopter.jpg" width="40%">
 
             </section>
@@ -412,9 +438,10 @@ However it is too slow to be embarked on the ornithopter for inline path computa
 
 
     
-        <section >
+        <section data-transition="slide" data-background="#4e4d7e" data-background-transition="zoom">
             
-            <h2><a id="user-content-2-neural-networks-preliminaries" class="anchor" href="#2-neural-networks-preliminaries" aria-hidden="true"></a>2. Neural Networks preliminaries</h2>
+            <!-- .slide: data-transition="slide" data-background="#4e4d7e" data-background-transition="zoom" -->
+<h2><a id="user-content-2-neural-networks-preliminaries" class="anchor" href="#2-neural-networks-preliminaries" aria-hidden="true"></a>2. Neural Networks preliminaries</h2>
 
             </section>
     
@@ -479,7 +506,7 @@ However it is too slow to be embarked on the ornithopter for inline path computa
         <section >
             <h3><a id="user-content-23-universal-approximator-theorem" class="anchor" href="#23-universal-approximator-theorem" aria-hidden="true"></a>2.3 Universal approximator theorem</h3>
 <blockquote>
-<p><small><strong>Theorem:</strong> feedforward networks with a linear output layer and at least one hidden layer with any continuous squashing function can approximate any Borel measurable function from one finite-dimensional space to another with any desired non-zero amount of error, provided that the network is given enough hidden units.</small></p>
+<p><strong>Theorem:</strong> feedforward networks with a linear output layer and at least one hidden layer with any continuous squashing function can approximate any Borel measurable function from one finite-dimensional space to another with any desired non-zero amount of error, provided that the network is given enough hidden units.</p>
 </blockquote>
 
             </section>
@@ -505,12 +532,10 @@ However it is too slow to be embarked on the ornithopter for inline path computa
             <h3><a id="user-content-24-nn-architecture" class="anchor" href="#24-nn-architecture" aria-hidden="true"></a>2.4 NN architecture</h3>
 <p>The neuronal network architecture and activation functions define the capacity the parametric family
 $${f^\ast(\cdot ,;\theta )\mid \theta \in \Theta }$$</p>
-<small>
-The capacity is determined by:
+<p>The capacity is determined by:</p>
 <ul>
 <li>Depth and width of the network: they will define the number of parameters available.</li>
-<li>Activation functions and general architecture: they will define the set of functions that can be learned by the NN.
-</small></li>
+<li>Activation functions and general architecture: they will define the set of functions that can be learned by the NN.</li>
 </ul>
 
             </section>
@@ -534,9 +559,7 @@ The capacity is determined by:
     <section>
         <section >
             <h3><a id="user-content-25-recurrent-neural-networks" class="anchor" href="#25-recurrent-neural-networks" aria-hidden="true"></a>2.5 Recurrent Neural networks</h3>
-<small>
-A recurrent neural network (RNN) is a class of artificial neural networks where connections between nodes form a directed graph along a temporal sequence. These connections allow previous outputs to be used as inputs while having hidden states.
-</small>
+<p>A recurrent neural network (RNN) is a class of artificial neural networks where connections between nodes form a directed graph along a temporal sequence. These connections allow previous outputs to be used as inputs while having hidden states.</p>
 
             </section>
         
@@ -561,9 +584,10 @@ A recurrent neural network (RNN) is a class of artificial neural networks where 
 
 
     
-        <section >
+        <section data-transition="slide" data-background="#e3be29" data-background-transition="zoom">
             
-            <h2><a id="user-content-3-propositions-and-basic-results" class="anchor" href="#3-propositions-and-basic-results" aria-hidden="true"></a>3. Propositions and basic results</h2>
+            <!-- .slide: data-transition="slide" data-background="#e3be29" data-background-transition="zoom" -->
+<h2><a id="user-content-3-propositions-and-basic-results" class="anchor" href="#3-propositions-and-basic-results" aria-hidden="true"></a>3. Propositions and basic results</h2>
 
             </section>
     
@@ -664,7 +688,7 @@ In the regression problem, the RNN aims to output the best possible approximatio
             </section>
         
             <section >
-                <h2><a id="user-content-331-mean-squared-error" class="anchor" href="#331-mean-squared-error" aria-hidden="true"></a>3.3.1 Mean squared Error</h2>
+                <h3><a id="user-content-331-mean-squared-error" class="anchor" href="#331-mean-squared-error" aria-hidden="true"></a>3.3.1 Mean squared Error</h3>
 <blockquote>
 <p><small> <strong>Proposition:</strong> given the above mentioned hypothesis, it is equivalent to use the Log Likelihood or the Mean Squared Error as loss functions for our NN.</p>
 </blockquote>
@@ -687,22 +711,17 @@ In the regression problem, the RNN aims to output the best possible approximatio
 
             </section>
         
-
-    </section>
-    
-
-
-
-    
-        <section >
-            
-            <h3><a id="user-content-332-kl-divergence-1" class="anchor" href="#332-kl-divergence-1" aria-hidden="true"></a>3.3.2 KL Divergence</h3>
+            <section >
+                <h3><a id="user-content-332-kl-divergence-1" class="anchor" href="#332-kl-divergence-1" aria-hidden="true"></a>3.3.2 KL Divergence</h3>
 <small>
 The KL divergence loss function represents the amount of information lost when $p_{model}$ is used to approximate $p_{data}$.
 <p>Or in other words, when our neural network $f^{\ast}(x;\hat{\theta})$ is used instead of the real source of data, which is our OSPA planner.
 </small></p>
 
             </section>
+        
+
+    </section>
     
 
 
@@ -719,7 +738,7 @@ The ornithopter possible action data set is actually a finite set of 35 differen
             </section>
         
             <section >
-                <h3><a id="user-content-33-classification-problem" class="anchor" href="#33-classification-problem" aria-hidden="true"></a>3.3 Classification problem</h3>
+                <h3><a id="user-content-34-classification-problem-1" class="anchor" href="#34-classification-problem-1" aria-hidden="true"></a>3.4 Classification problem</h3>
 <small>
 In this case, we want the RNN to output the probability that each category has to be selected:
  $$\hat{y_k} = p(y_k|x,\theta)$$
@@ -768,9 +787,256 @@ The cross entropy loss function can be interpreted as the expected message-lengt
 
 
     
+        <section data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
+            
+            <!-- .slide: data-transition="slide" data-background="#b5533c" data-background-transition="zoom" -->
+<h2><a id="user-content-4-rnn-implementation" class="anchor" href="#4-rnn-implementation" aria-hidden="true"></a>4. RNN implementation</h2>
+
+            </section>
+    
+
+
+
+    
+    <section>
+        <section >
+            <h3><a id="user-content-41-data-pre-processing" class="anchor" href="#41-data-pre-processing" aria-hidden="true"></a>4.1 data pre-processing</h3>
+<ol>
+<li>From states to state distances:
+$$x_i = s_{target} - s_i$$</li>
+<li>Data normalization:<br>
+$$x_i = \frac{z_i }{\sigma}$$</li>
+<li>Append target point to the trajectory
+$$\vec{x}.append(x_{target})$$</li>
+</ol>
+
+            </section>
+        
+            <section >
+                <h3><a id="user-content-41-data-pre-processing-1" class="anchor" href="#41-data-pre-processing-1" aria-hidden="true"></a>4.1 data pre-processing</h3>
+<ul>
+<li>
+<p>Data truncation and padding</p>
+<img data-src="./images/Padding.png">
+</li>
+</ul>
+
+            </section>
+        
+
+    </section>
+    
+
+
+
+    
         <section >
             
-            <h1><a id="user-content-questions" class="anchor" href="#questions" aria-hidden="true"></a>Questions?</h1>
+            <h3><a id="user-content-42-output-layer" class="anchor" href="#42-output-layer" aria-hidden="true"></a>4.2 output layer</h3>
+
+            </section>
+    
+
+
+
+    
+    <section>
+        <section >
+            <h3><a id="user-content-421-classification-output-layer" class="anchor" href="#421-classification-output-layer" aria-hidden="true"></a>4.2.1 classification output layer</h3>
+<p>The output layer consists on a dense layer with a softmax activation function</p>
+  <img data-src="./images/Output classif.png" width = "60%">
+<p>It transforms the output into the probability of predicting each specific class</p>
+
+            </section>
+        
+            <section >
+                <h3><a id="user-content-421-classification-output-layer-1" class="anchor" href="#421-classification-output-layer-1" aria-hidden="true"></a>4.2.1 classification output layer</h3>
+<blockquote>
+<p><strong>Proposition:</strong> If we assume that $p(x|y^k=1)$ follows a Gaussian, a softmax function is capable of estimating the probabilities of obtaining each of the categories using Bayes theorem</p>
+</blockquote>
+<script type="math/tex; mode=display">
+   p(y^k= 1|x)=\frac{p(x|y^k = 1)p(y^k = 1)}{p(x)}=\frac{e^{-z_k(x; \theta)}}{\sum_{j=1}^Ne^{-z_j(x; \theta)} }
+</script>
+
+            </section>
+        
+
+    </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-422-regression-output-layer" class="anchor" href="#422-regression-output-layer" aria-hidden="true"></a>4.2.2 regression output layer</h3>
+<p>The output layer consists on a dense layer with a linear activation function</p>
+  <img data-src="./images/Output regression.png" width = "50%">
+<p>It transforms the output into the estimated value of each component</p>
+
+            </section>
+    
+
+
+
+    
+        <section data-transition="slide" data-background="#3cb1b5" data-background-transition="zoom">
+            
+            <!-- .slide: data-transition="slide" data-background="#3cb1b5" data-background-transition="zoom" -->
+<h2><a id="user-content-5-results" class="anchor" href="#5-results" aria-hidden="true"></a>5. Results</h2>
+
+            </section>
+    
+
+
+
+    
+    <section>
+        <section >
+            <h3><a id="user-content-51-action-classification-model" class="anchor" href="#51-action-classification-model" aria-hidden="true"></a>5.1 action classification model</h3>
+ <img data-src="./images/S2A step.png">
+
+            </section>
+        
+            <section >
+                <h3><a id="user-content-511-action-classification-model" class="anchor" href="#511-action-classification-model" aria-hidden="true"></a>5.1.1 action classification model</h3>
+<section style="text-align: left;">
+The configuration is as follows:
+<ul>
+<li>Input layer: last predicted state $x_{t-1}$</li>
+<li>The recurrent layer: is expected to learn the function $h_{t} = f(h_{t-1}; x_{t-1})$</li>
+<li>Output layer: probabilities for the next action to apply a_{t}.</li>
+<li>Fixed function: $x_t=F(x_{t-1};a_t)$</li>
+</ul>
+</section>
+
+            </section>
+        
+            <section >
+                <h3><a id="user-content-511-action-classification-model-1" class="anchor" href="#511-action-classification-model-1" aria-hidden="true"></a>5.1.1 action classification model</h3>
+<p>Network summary</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th style="text-align:center">Output shape</th>
+<th style="text-align:center">parameter number</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LSTM</td>
+<td style="text-align:center">[None, None, 11]</td>
+<td style="text-align:center">792</td>
+</tr>
+<tr>
+<td>Dense</td>
+<td style="text-align:center">[None, None, 35]</td>
+<td style="text-align:center">420</td>
+</tr>
+<tr>
+<td>Lambda</td>
+<td style="text-align:center">[None, None, 6]</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+
+            </section>
+        
+
+    </section>
+    
+
+
+
+    
+    <section>
+        <section >
+            <h3><a id="user-content-512-action-classification-training" class="anchor" href="#512-action-classification-training" aria-hidden="true"></a>5.1.2 action classification training</h3>
+<p>We use the KL divergence loss function as the measure of the dissimilarity between these two distributions
+$$\displaystyle D_{\text{KL}}(p_{data}\parallel p_{model})=\sum_{x\in {\mathcal{X}}}p(a|x)\log \left({\frac {p(a|x)}{p(a|x;\theta)}}\right)$$
+to estimate $\hat{a} = p(a|x;\theta)$ as close as possible to the true action category value $p(a|x)$.</p>
+
+            </section>
+        
+            <section >
+                <h3><a id="user-content-512-action-classification-training-1" class="anchor" href="#512-action-classification-training-1" aria-hidden="true"></a>5.1.2 action classification training</h3>
+<img data-src="./images/S2A loss curve.png">
+
+            </section>
+        
+
+    </section>
+    
+
+
+
+    
+    <section>
+        <section >
+            <h3><a id="user-content-513-action-classification-results" class="anchor" href="#513-action-classification-results" aria-hidden="true"></a>5.1.3 action classification results</h3>
+<img data-src="./images/S2A trajectory.png" width = 45%>
+<img data-src="./images/S2A trajectory components.png" width = 45%>
+
+            </section>
+        
+            <section >
+                <h3><a id="user-content-513-action-classification-results-1" class="anchor" href="#513-action-classification-results-1" aria-hidden="true"></a>5.1.3 action classification results</h3>
+<p>Results summary</p>
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th style="text-align:center">Cost (W)</th>
+<th style="text-align:center">Time (s)</th>
+<th style="text-align:center">Precision (m)</th>
+<th style="text-align:center">Trajectory error (m)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OSPA</td>
+<td style="text-align:center">34.68</td>
+<td style="text-align:center">520</td>
+<td style="text-align:center">2.84</td>
+<td style="text-align:center">N/A</td>
+</tr>
+<tr>
+<td>Action prediction</td>
+<td style="text-align:center">37.25</td>
+<td style="text-align:center">0.43</td>
+<td style="text-align:center">6.29</td>
+<td style="text-align:center">3.85</td>
+</tr>
+</tbody>
+</table>
+
+            </section>
+        
+
+    </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-53-decoder-model" class="anchor" href="#53-decoder-model" aria-hidden="true"></a>5.3 Decoder model</h3>
+ <img data-src="./images/Decoder.png">
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-54-ode-integrator-model" class="anchor" href="#54-ode-integrator-model" aria-hidden="true"></a>5.4 ODE integrator model</h3>
+ <img data-src="./images/ODE.png">
+<hr>
 
             </section>
     
