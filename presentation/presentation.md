@@ -1,5 +1,5 @@
 ---
-theme : "Black"
+theme : "Beige"
 transition: "slide"
 highlightTheme: "monokai"
 logoImg: "./images/QR paskymailweb.png"
@@ -82,16 +82,33 @@ title: "Recurrent neural networks for ornithopter trajectory optimization"
 
 ---
 
+### 1.1 Problem statement - states and actions
+
+
+---
+
+### 1.1 optimal trajectory as a sequence of optimal actions
+
+
+---
+
+### 1.1 optimal trajectory as a sequence of optimal states
+
+
+---
+
+
 ### 1.2 The OSPA approach 
 
 OSPA (Ornithopter Segmentation Path Planning Approach) is a novel heuristic algorithm able to efficiently compute optimal trajectories. 
-However it is too slow to be embarked on the ornithopter for inline path computation.  
+
+Drawback: Time consuming. Cannot be embarked on the ornithopter for online computation.
 
 ---
 
 ### 1.3 The RNN approach
 
-> **Proposition:** contour this problem using recurrent neuronal networks.
+> **Our proposal:** contour this problem using recurrent neuronal networks.
 
 The neuronal network is tasked with learning the underlying optimal trajectory flight dynamics, which are in turn numerically estimated by the OSPA.
 
@@ -100,9 +117,9 @@ The neuronal network is tasked with learning the underlying optimal trajectory f
 
 ### 1.3 The RNN approach
 
-More precisely, OSPA is used to compute a set of optimal trajectories for the ornithopter and then, the neuronal network is tasked with learning the underlying function from it. 
+**Way of working:** OSPA is used to compute a set of optimal trajectories. The neuronal network is tasked to learning the underlying function from it. 
 
-> The goal is to obtain similar performances to the heuristic method with much faster computation times.
+> **Goal**  obtain similar performances to OSPA with faster computation times.
 
 ---
 
@@ -116,13 +133,13 @@ More precisely, OSPA is used to compute a set of optimal trajectories for the or
 
 ### 2.1 Feedforward neural networks
 
-<img data-src="./images/NN_schema.png">
+<img data-src="./images/Neuron_diagram.png">
 
 --
 
 ### 2.1 Feedforward NN algebraic equations
 
-<img data-src="./images/Neuron_diagram.png" width="40%">
+<img data-src="./images/NN_schema.png">
 <small>
 <span>
 \[\begin{aligned}
@@ -149,29 +166,24 @@ where the family $f^*(\cdot \,;\theta)$ is given by the NN architecture and the 
 
 ---
 
-### 2.3 Universal approximator theorem
-
-> **Theorem:** feedforward networks with a linear output layer and at least one hidden layer with any continuous squashing function can approximate any Borel measurable function from one finite-dimensional space to another with any desired non-zero amount of error, provided that the network is given enough hidden units.
-
---
 
 ### 2.3 Universal approximator theorem
 
-> Therefore $f^{\ast}(x;\hat{\theta})$ can approximate $f$ as much as desired
+> Thanks to the Universal approximator theorem, $f^{\ast}(x;\hat{\theta})$ can approximate $f$ as much as desired.
  
-This is true since a continuous function on a closed and bounded subset of $R^N$ is Borel measurable.
+The theorem is met since a continuous function on a closed and bounded subset of $R^N$ is Borel measurable.
 
 ---
 
 ### 2.4 NN architecture
 
 The neuronal network architecture and activation functions define the capacity the parametric family 
-$$\{f^\ast(\cdot \,;\theta )\mid \theta \in \Theta \}$$ 
+$$\{f^\ast(x;\theta )\mid \theta \in \Theta \}$$ 
 
 The capacity is determined by:
 
-* Depth and width of the network: they will define the number of parameters available.
-* Activation functions and general architecture: they will define the set of functions that can be learned by the NN.
+* Depth and width of the network: number of parameters available.
+* Activation functions and general architecture:  set of functions that can be learned.
 
 
 --
@@ -180,7 +192,13 @@ The capacity is determined by:
 
 Due to the complexity of the ornithopter problem, our NN architecture must have the capacity to capture temporal dynamic behaviors.
 
-> **Proposition:**  use a recurrent neural network with just one single layer to learn the OSPA underlaying trajectory flight dynamics 
+> **Proposal:**  use a recurrent neural network with just one single layer to learn the OSPA underlaying trajectory flight dynamics 
+
+---
+
+### 2.4 NN parameter optimization
+
+Loss function
 
 ---
 
@@ -189,7 +207,7 @@ Due to the complexity of the ornithopter problem, our NN architecture must have 
 A recurrent neural network (RNN) is a class of artificial neural networks where connections between nodes form a directed graph along a temporal sequence. These connections allow previous outputs to be used as inputs while having hidden states.
 --
 
-### 2.5 Recurrent Neural networks
+### 2.5 LSTM Recurrent Neural networks
 
 <img data-src="./images/RNN gates.png" width="50%">
 <small>
@@ -215,50 +233,45 @@ A recurrent neural network (RNN) is a class of artificial neural networks where 
 ---
 
 ## 3.1 RNN unfolding
-<small>
 
 > **Theorem:** the unfolding property can only be applied if the following hypothesis is met: the conditional probability distribution over the variables at t+1 given the variables at time t, is stationary.
-</small>
+
+
 --
 
-### 3.1 RNN unfolding
+### 3.2 Maximum likelihood
 
-> <small>Therefore the RNN can be virtually considered as a feedforward NN and the results seen in [1](#/1) and [2](#/3) are still valid.</small>
- 
-<small>This is true since for every tuple of starting and target points, it is expected to obtain the same optimal trajectory.  Therefore, considering the starting point as an intermediate point at time t of a longer trajectory with same target point,the following intermediary points are expected to be same.</small>
-
----
-
-## 3.2 Maximum likelihood
-
-<img data-src="./images/ML concept.png">
-
----
-
-
-### 3.2 ML to estimate optimal parameters
-<small>
-Now that our family is defined, we need to compute the parameters $\theta$ so to obtain the best approximate $f^{\ast}(x;\hat{\theta})$ to the true underlying function $f$.
-
-
-> **Proposition:** the ML method is proposed to estimate the parameter value $\hat{\theta}$ for a given family, so that under the assumed model $f^{\ast}(x;\hat{\theta})$, the observed data is the most probable. 
-</small>
---
-
-### 3.2 ML to estimate optimal parameters
-
-> <small> **Definition:** Consider a set of $m$ examples $X ={x^1,...,x^m} $ drawn independently from the true but unknown data generating distribution $p_{data}(x)$. Let  $p_{model}(X; \theta)$ be a parametric family of probability distributions over the same space indexed by $\theta$. The maximum likelihood estimator for $\theta$ is then deﬁned as: 
+<img data-src="./images/ML concept.png" width="40%">
 
 <script type="math/tex; mode=display">
   \theta_{ML} =  \arg\max_{\theta}  p_{model}(X;\theta) = \arg\max_{\theta}
 \prod_{i=1}^m p_{model}(x_i ;\theta)
 </script>
 
-</small>
+---
+
+### 3.2 ML to estimate optimal parameters
+
+
+> **Proposal:** the ML method is proposed to estimate the parameter value $\hat{\theta}$ for a given family, so that under the assumed model $f^{\ast}(x;\hat{\theta})$, the observed data is the most probable. 
 
 ---
 
-### 3.3 Regression problem
+### 3.2 problem types:  regression and classification
+
+---
+
+### 3.3.2 KL Divergence
+
+> <small> **Proposition:**  It is equivalent to use the Log-likelihood or the KL divergence as loss functions to compute the optimal parameters for our NN regression problem. 
+
+<script type="math/tex; mode=display">
+   \displaystyle D_{\text{KL}}(p_{data}\parallel p_{model})=-H_{p_{data}} - L(x;\theta)
+</script>
+
+</small>
+
+### 3.3 ML applied to the Regression problem
 
 <small>
 In the regression problem, the RNN aims to output the best possible approximation to the values of the true states in $R^6$ given by an OSPA trajectory.
@@ -280,17 +293,6 @@ where  $\hat{y_i}$ is our prediction, $y_i$ is the real value and $e_i$ is the e
 
 </small>
 
---
-
-### 3.3.2 KL Divergence
-
-> <small> **Proposition:**  It is equivalent to use the Log-likelihood or the KL divergence as loss functions to compute the optimal parameters for our NN regression problem. 
-
-<script type="math/tex; mode=display">
-   \displaystyle D_{\text{KL}}(p_{data}\parallel p_{model})=-H_{p_{data}} - L(x;\theta)
-</script>
-
-</small>
 
 --
 
@@ -342,18 +344,6 @@ The cross entropy loss function can be interpreted as the expected message-lengt
 Or in other words, when our neural network $f^{\ast}(x;\hat{\theta})$ is used instead of the real source of data, which is our OSPA planner.
 </small>
 
---
-
-### 3.4.2 KL Divergence
-
-> <small> **Proposition:**  It is equivalent to use the Log-likelihood or the KL divergence as loss functions to compute the optimal parameters for our NN classification problem. 
-
-<script type="math/tex; mode=display">
-   \displaystyle D_{\text{KL}}(p(y)\parallel \hat{y})=-H_{y} + H_{y\hat{y}}(x;\theta)
-</script>
-
-</small>
-
 ---
 
 <!-- .slide: data-transition="slide" data-background="#b5533c" data-background-transition="zoom" -->
@@ -368,15 +358,8 @@ Or in other words, when our neural network $f^{\ast}(x;\hat{\theta})$ is used in
 $$x_i = s_{target} - s_i$$
 2. Data normalization:  
 $$x_i = \frac{z_i }{\sigma}$$
-3. Append target point to the trajectory
+3. Append target point to the OSPA trajectory
 $$\vec{x}.append(x_{target})$$
---
-
-### 4.1 data pre-processing
-
-* Data truncation and padding
-
-  <img data-src="./images/Padding.png">
 
 ---
 
@@ -476,6 +459,11 @@ $$\displaystyle D_{\text{KL}}(p_{data}\parallel p_{model})=\sum_{x\in {\mathcal{
 
 --
 
+### 5.1.3 action classification - metrics
+
+---
+
+
 ### 5.1.3 action classification results
 
 Results summary
@@ -485,6 +473,50 @@ Results summary
 | OSPA     | 34.68 | 520  |2.84 | N/A |
 | Action prediction  |  37.25  |  0.43  | 6.29 |  3.85 |
 
+---
+
+## 6 Conclusions
+
+<!-- .slide: data-transition="slide" data-background="#e38c22" data-background-transition="zoom" -->
+
+--
+
+### 6.1 Conclusions
+
+<section style="text-align: left;">
+
+On the theoretical side, all neural network expressions or choices have been mathematically derived or supported by three pillars:
+1. The universal estimator theorem.
+2. The development of the NN algebraic equations derived from the neuron ones.
+3. The use of the maximum likelihood and its derivations to determine the optimal parameters for the paramedic family formed by the NN.
+
+</section>
+
+--
+
+### 6.2 Conclusions
+
+<section style="text-align: left;">
+
+On the applications side, several RNN architectures have been applied to the specific problem of the ornithopter trajectory optimization:
+1. The RNN has outperformed the OSPA method both in time (0.5s vs 520s) and precision to the target (1.19m vs 2.84m).
+2. The RNN has been able to learn the underlying flight dynamics of the problem.
+3. The ODE Integrator architecture has given a physically interpreted RNN behaviour.
+4. All the results and choices have been justified using the mathematical background developed at the beginning of this thesis.
+
+
+</section>
+
+---
+
+
+### 7 Future work
+
+---
+
+### Thank you!
+
+ <img data-src="./images/QR paskymailweb.png">
 
 ---
 
