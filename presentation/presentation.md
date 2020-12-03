@@ -2,14 +2,16 @@
 theme : "Beige"
 transition: "slide"
 highlightTheme: "monokai"
-logoImg: "./images/QR_paskymailweb.png"
+logoImg: "./images/US_logo_transparente.png"
 slideNumber: false
 title: "Recurrent neural networks for ornithopter trajectory optimization"
 ---
 
 ::: block
 
-Scan this QR to follow the presentation on your mobile phone
+<!-- .slide: data-background="https://media.giphy.com/media/cebFLeZp9lOUXmoKEB/giphy.gif" opacity = 0.2 -->
+
+<span style="color:white">**Scan this QR to follow the presentation on your mobile phone**</span>
 
 <img data-src="./images/QR_paskymailweb.png">
 
@@ -43,17 +45,18 @@ Scan this QR to follow the presentation on your mobile phone
 
 <!-- .slide: data-transition="slide" data-background="#4d7e65" data-background-transition="zoom" -->
 
+
 ## 1. Ornithopter trajectory optimization problem
+
+---
+
+### 1. Ornithopter trajectory optimization problem
 
 <section>
 
-<img data-src="./images/ornithopter.jpg" width="40%">
+<img data-src="./images/ornithopter.jpg" width="70%">
 
 </section>
-
---
-
-### 1. Ornithopter trajectory optimization problem
 
 <section>
 
@@ -166,7 +169,7 @@ In order to feed the RNN, an OSPA optimal trajectories dataset is generated, com
 
 <section style="text-align: left;">
 
-In total, 236 different trajectories are generated:
+In total, 236 different trajectories are generated along the following ranges:
 
 
 | Variable   | Initial State     | Target State   |
@@ -188,13 +191,15 @@ In total, 236 different trajectories are generated:
 
 ---
 
-### 2.1 Feedforward neural networks
+### 2.1 Feedforward NN algebraic equations
+
+<section>
 
 <img data-src="./images/Neuron_diagram.png" width="70%">
 
---
+</section>
 
-### 2.1 Feedforward NN algebraic equations
+<section>
 
 <img data-src="./images/NN_schema.png">
 <small>
@@ -205,6 +210,9 @@ In total, 236 different trajectories are generated:
 \end{aligned} \]
 </span>
 </small>
+
+</section>
+
 ---
 
 ### 2.2 NN's parametric family
@@ -225,7 +233,7 @@ where the family $f^*( x ;\theta)$ is given by the NN architecture and the param
 
 ---
 
-### 2.4 NN architecture
+### 2.3 NN architecture
 
 <section style="text-align: left;">
 
@@ -270,6 +278,7 @@ $$\theta^{t+1}= \theta^{t} - \alpha \frac{\partial J(x, \theta^{t})}{\partial \t
 Connections between nodes form a directed graph along a temporal sequence. These connections allow previous outputs to be used as inputs.
 
 </section>
+
 --
 
 ### 2.5 LSTM Recurrent Neural networks
@@ -357,12 +366,12 @@ The KL divergence loss function represents the amount of information lost when $
 
 ---
 
-### 3.3.1 problem types:  regression and classification
+### 3.4 problem types:  regression and classification
 
 ---
 
 
-### 3.3 ML applied to the Regression problem
+### 3.4.1 ML applied to the Regression problem
 
 <section style="text-align: left;">
 
@@ -376,7 +385,7 @@ where  $\hat{y_i}$ is our prediction, $y_i$ is the real value and $e_i$ is the e
 
 --
 
-### 3.3.1 Mean squared Error
+### 3.4.1 Mean squared Error
 
 > **Proposition:** given the above mentioned hypothesis, it is equivalent to use the Log Likelihood or the Mean Squared Error as loss functions for our NN.
 
@@ -389,7 +398,7 @@ where  $\hat{y_i}$ is our prediction, $y_i$ is the real value and $e_i$ is the e
 
 ---
 
-### 3.4 Classification problem
+### 3.4.2 Classification problem
 
 <section style="text-align: left;">
 
@@ -412,7 +421,7 @@ where $\hat{y_k}$ is the vector with the predicted probabilities for each catego
 
 ---
 
-### 3.4.1 Cross Entropy
+### 3.4.2 Cross Entropy
 
 <section>
 
@@ -496,7 +505,7 @@ It transforms the output into the estimated value of each component
 
 ---
 
-### 5.1 action classification model
+### 5.1.1 action classification model
 
  <img data-src="./images/S2A_step.png">
 
@@ -612,7 +621,7 @@ $$\theta_{ML} =\theta_{mMSE}= \arg\max_{\theta}\sum_{i=1}^m {\frac {1}{2}}\left(
 
 ---
 
-### 5.3 Decoder model
+### 5.3.1 Decoder model
 
  <img data-src="./images/Decoder.png">
 
@@ -755,6 +764,11 @@ Code open and available in Github: https://github.com/paskymail/Neuronal_Network
 
 ---
 
+## 7 Future work
+
+<!-- .slide: data-transition="slide" data-background="#4d7e65" data-background-transition="zoom" -->
+
+---
 
 ### 7 Future work
 <section style="text-align: left;">
@@ -770,6 +784,8 @@ Further investigation lines:
 
 ---
 
-### Thank you!
+<!-- .slide: data-background="https://media.giphy.com/media/eljCVpMrhepUSgZaVP/giphy.gif" opacity = 0.2 -->
+
+## Thank you!
 
  <img data-src="./images/QR_paskymailweb.png">
