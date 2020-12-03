@@ -71,7 +71,7 @@ The problem we want to solve is to compute an optimal trajectory of an ornithopt
 
 OSPA* (Ornithopter Segmentation Path Planning Approach) is a novel heuristic algorithm able to efficiently compute optimal trajectories.
 
-Drawback: Time consuming. Cannot be embarked on the ornithopter for online computation. {.fragment .highlight-red}
+Drawback: Time consuming for long distances. Cannot be embarked on the ornithopter for online computation. {.fragment .highlight-red}
 
 <small>
 OSPA* [2020]:
@@ -562,8 +562,7 @@ $$\displaystyle D_{\text{KL}}(p_{data}\parallel p_{model})=\sum_{x\in {\mathcal{
 
 ### 5.2.1 sequence to sequence model
 
- <img data-src="./images/RNN_s2s_draw.png" height = "100%">
- <img data-src="./images/Many_to_many.png" width = "30%">
+ <img data-src="./images/Decoder_training.png" height = "100%">
 
 ---
 
