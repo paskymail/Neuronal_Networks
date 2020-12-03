@@ -264,7 +264,7 @@
 <body>
   
 <div id="logo" style="position: fixed; top: 20px; left: 20px; z-index: 1">
-    <img src="./images/QR_paskymailweb.png" />
+    <img src="./images/US_logo_transp.png" />
 </div>
 
 
@@ -277,10 +277,11 @@
 
 
     
-        <section >
+        <section data-background="https://media.giphy.com/media/cebFLeZp9lOUXmoKEB/giphy.gif" opacity = 0.2>
             
             <div class="block">
-<p>Scan this QR to follow the presentation on your mobile phone</p>
+<!-- .slide: data-background="https://media.giphy.com/media/cebFLeZp9lOUXmoKEB/giphy.gif" opacity = 0.2 -->
+<p><span style="color:white"><strong>Scan this QR to follow the presentation on your mobile phone</strong></span></p>
 <img data-src="./images/QR_paskymailweb.png">
 </div>
 
@@ -323,27 +324,29 @@
 
 
     
-    <section>
         <section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+            
             <!-- .slide: data-transition="slide" data-background="#4d7e65" data-background-transition="zoom" -->
 <h2><a id="user-content-1-ornithopter-trajectory-optimization-problem" class="anchor" href="#1-ornithopter-trajectory-optimization-problem" aria-hidden="true"></a>1. Ornithopter trajectory optimization problem</h2>
-<section>
-<img data-src="./images/ornithopter.jpg" width="40%">
-</section>
 
             </section>
-        
-            <section >
-                <h3><a id="user-content-1-ornithopter-trajectory-optimization-problem-1" class="anchor" href="#1-ornithopter-trajectory-optimization-problem-1" aria-hidden="true"></a>1. Ornithopter trajectory optimization problem</h3>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-1-ornithopter-trajectory-optimization-problem-1" class="anchor" href="#1-ornithopter-trajectory-optimization-problem-1" aria-hidden="true"></a>1. Ornithopter trajectory optimization problem</h3>
+<section>
+<img data-src="./images/ornithopter.jpg" width="70%">
+</section>
 <section>
 <img data-src="./images/trajectories.png" width="40%">
 <p>The problem we want to solve is to compute an optimal trajectory of an ornithopter connecting two given positions A and B while minimizing the energy consumption</p>
 </section>
 
             </section>
-        
-
-    </section>
     
 
 
@@ -441,7 +444,7 @@ $$a =(\delta, f)$$</p>
 </ul>
 </section>
 <section style="text-align: left;">
-<p>In total, 236 different trajectories are generated:</p>
+<p>In total, 236 different trajectories are generated along the following ranges:</p>
 <table>
 <thead>
 <tr>
@@ -492,15 +495,13 @@ $$a =(\delta, f)$$</p>
 
 
     
-    <section>
         <section >
-            <h3><a id="user-content-21-feedforward-neural-networks" class="anchor" href="#21-feedforward-neural-networks" aria-hidden="true"></a>2.1 Feedforward neural networks</h3>
+            
+            <h3><a id="user-content-21-feedforward-nn-algebraic-equations" class="anchor" href="#21-feedforward-nn-algebraic-equations" aria-hidden="true"></a>2.1 Feedforward NN algebraic equations</h3>
+<section>
 <img data-src="./images/Neuron_diagram.png" width="70%">
-
-            </section>
-        
-            <section >
-                <h3><a id="user-content-21-feedforward-nn-algebraic-equations" class="anchor" href="#21-feedforward-nn-algebraic-equations" aria-hidden="true"></a>2.1 Feedforward NN algebraic equations</h3>
+</section>
+<section>
 <img data-src="./images/NN_schema.png">
 <small>
 <span>
@@ -510,11 +511,9 @@ $$a =(\delta, f)$$</p>
 \end{aligned} \]
 </span>
 </small>
+</section>
 
             </section>
-        
-
-    </section>
     
 
 
@@ -543,7 +542,7 @@ $$a =(\delta, f)$$</p>
     
         <section >
             
-            <h3><a id="user-content-24-nn-architecture" class="anchor" href="#24-nn-architecture" aria-hidden="true"></a>2.4 NN architecture</h3>
+            <h3><a id="user-content-23-nn-architecture" class="anchor" href="#23-nn-architecture" aria-hidden="true"></a>2.3 NN architecture</h3>
 <section style="text-align: left;">
 <p>The family ${f^\ast(x;\theta )\mid \theta \in \Theta }$ is defined by the neuronal network architecture and activation functions, determined by:</p>
 <ul>
@@ -693,7 +692,7 @@ $$a =(\delta, f)$$</p>
     
         <section >
             
-            <h3><a id="user-content-331-problem-types--regression-and-classification" class="anchor" href="#331-problem-types--regression-and-classification" aria-hidden="true"></a>3.3.1 problem types:  regression and classification</h3>
+            <h3><a id="user-content-34-problem-types--regression-and-classification" class="anchor" href="#34-problem-types--regression-and-classification" aria-hidden="true"></a>3.4 problem types:  regression and classification</h3>
 
             </section>
     
@@ -703,7 +702,7 @@ $$a =(\delta, f)$$</p>
     
     <section>
         <section >
-            <h3><a id="user-content-33-ml-applied-to-the-regression-problem" class="anchor" href="#33-ml-applied-to-the-regression-problem" aria-hidden="true"></a>3.3 ML applied to the Regression problem</h3>
+            <h3><a id="user-content-341-ml-applied-to-the-regression-problem" class="anchor" href="#341-ml-applied-to-the-regression-problem" aria-hidden="true"></a>3.4.1 ML applied to the Regression problem</h3>
 <section style="text-align: left;">
 <p>In the regression problem, the RNN aims to output the best possible approximation to the values of the true states in $R^6$ given by an OSPA trajectory.</p>
 <p>$$y_i = \hat{y_i} + e_i$$</p>
@@ -713,7 +712,7 @@ $$a =(\delta, f)$$</p>
             </section>
         
             <section >
-                <h3><a id="user-content-331-mean-squared-error" class="anchor" href="#331-mean-squared-error" aria-hidden="true"></a>3.3.1 Mean squared Error</h3>
+                <h3><a id="user-content-341-mean-squared-error" class="anchor" href="#341-mean-squared-error" aria-hidden="true"></a>3.4.1 Mean squared Error</h3>
 <blockquote>
 <p><strong>Proposition:</strong> given the above mentioned hypothesis, it is equivalent to use the Log Likelihood or the Mean Squared Error as loss functions for our NN.</p>
 </blockquote>
@@ -734,7 +733,7 @@ $$a =(\delta, f)$$</p>
     
         <section >
             
-            <h3><a id="user-content-34-classification-problem" class="anchor" href="#34-classification-problem" aria-hidden="true"></a>3.4 Classification problem</h3>
+            <h3><a id="user-content-342-classification-problem" class="anchor" href="#342-classification-problem" aria-hidden="true"></a>3.4.2 Classification problem</h3>
 <section style="text-align: left;">
 <p>The ornithopter possible action data set is actually a finite set of 35 different action tuples.</p>
 <p>In the classification model each action $a_k$ is treated as a different category:
@@ -754,7 +753,7 @@ $$a_k = (\delta_k, f_k), \ k =1,…, 35$$</p>
     
         <section >
             
-            <h3><a id="user-content-341-cross-entropy" class="anchor" href="#341-cross-entropy" aria-hidden="true"></a>3.4.1 Cross Entropy</h3>
+            <h3><a id="user-content-342-cross-entropy" class="anchor" href="#342-cross-entropy" aria-hidden="true"></a>3.4.2 Cross Entropy</h3>
 <section>
 <blockquote>
 <p><strong>Proposition:</strong> It is equivalent to use the Log-likelihood or the Cross Entropy as loss function for our NN classification problem.</p>
@@ -868,7 +867,7 @@ $$\vec{x}.append(x_{target})$$</li>
     
         <section >
             
-            <h3><a id="user-content-51-action-classification-model" class="anchor" href="#51-action-classification-model" aria-hidden="true"></a>5.1 action classification model</h3>
+            <h3><a id="user-content-511-action-classification-model" class="anchor" href="#511-action-classification-model" aria-hidden="true"></a>5.1.1 action classification model</h3>
  <img data-src="./images/S2A_step.png">
 
             </section>
@@ -1034,7 +1033,7 @@ to estimate $\hat{a} = p(a|x;\theta)$ as close as possible to the true action ca
     
         <section >
             
-            <h3><a id="user-content-53-decoder-model" class="anchor" href="#53-decoder-model" aria-hidden="true"></a>5.3 Decoder model</h3>
+            <h3><a id="user-content-531-decoder-model" class="anchor" href="#531-decoder-model" aria-hidden="true"></a>5.3.1 Decoder model</h3>
  <img data-src="./images/Decoder.png">
 
             </section>
@@ -1268,9 +1267,20 @@ to estimate $\hat{a} = p(a|x;\theta)$ as close as possible to the true action ca
 
 
     
+        <section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+            
+            <h2><a id="user-content-7-future-work" class="anchor" href="#7-future-work" aria-hidden="true"></a>7 Future work</h2>
+<!-- .slide: data-transition="slide" data-background="#4d7e65" data-background-transition="zoom" -->
+
+            </section>
+    
+
+
+
+    
         <section >
             
-            <h3><a id="user-content-7-future-work" class="anchor" href="#7-future-work" aria-hidden="true"></a>7 Future work</h3>
+            <h3><a id="user-content-7-future-work-1" class="anchor" href="#7-future-work-1" aria-hidden="true"></a>7 Future work</h3>
 <section style="text-align: left;">
 <p>Further investigation lines:</p>
 <ol>
@@ -1288,9 +1298,10 @@ to estimate $\hat{a} = p(a|x;\theta)$ as close as possible to the true action ca
 
 
     
-        <section >
+        <section data-background="https://media.giphy.com/media/eljCVpMrhepUSgZaVP/giphy.gif" opacity = 0.2>
             
-            <h3><a id="user-content-thank-you" class="anchor" href="#thank-you" aria-hidden="true"></a>Thank you!</h3>
+            <!-- .slide: data-background="https://media.giphy.com/media/eljCVpMrhepUSgZaVP/giphy.gif" opacity = 0.2 -->
+<h2><a id="user-content-thank-you" class="anchor" href="#thank-you" aria-hidden="true"></a>Thank you!</h2>
  <img data-src="./images/QR_paskymailweb.png">
             </section>
     
