@@ -264,7 +264,7 @@
 <body>
   
 <div id="logo" style="position: fixed; top: 20px; left: 20px; z-index: 1">
-    <img src="./images/QR paskymailweb.png" />
+    <img src="./images/QR_paskymailweb.png" />
 </div>
 
 
@@ -279,8 +279,9 @@
     
         <section >
             
-            <div style="background:red;width:500px" class="block">
-<p><em>Work in progress</em></p>
+            <div class="block">
+<p>Scan this QR to follow the presentation on your mobile phone</p>
+<img data-src="./images/QR_paskymailweb.png">
 </div>
 
             </section>
@@ -293,7 +294,8 @@
             
             <h2><a id="user-content-trabajo-fin-de-master" class="anchor" href="#trabajo-fin-de-master" aria-hidden="true"></a>Trabajo Fin de Master</h2>
 <p>Recurrent neural networks for ornithopter trajectory optimization</p>
- <img data-src="./images/logo_US.png">
+ <img data-src="./images/logo_US.png">  
+ <img data-src="./images/imus_basico.png" width = "40%">
 <p><small>Supervisor: José Miguel Díaz Báñez / Candidate: Luis David Pascual Callejo</small></p>
 
             </section>
@@ -302,68 +304,41 @@
 
 
     
-    <section>
         <section >
+            
             <h2><a id="user-content-overview" class="anchor" href="#overview" aria-hidden="true"></a>Overview</h2>
 <ol>
-<li>Ornithopter trajectory optimization problem
-<ol>
-<li>OSPA approach</li>
-<li>RNN approach</li>
-</ol>
-</li>
-<li>Neural Networks preliminaries
-<ol>
-<li>Feedforward Neural Networks</li>
-<li>NN’s parametric family</li>
-<li>Universal Approximator theorem</li>
-<li>Neural Network architecture</li>
-<li>Recurrent Neural Network</li>
-</ol>
-</li>
-</ol>
-
-            </section>
-        
-            <section >
-                <h2><a id="user-content-overview-1" class="anchor" href="#overview-1" aria-hidden="true"></a>Overview</h2>
-<ol start="3">
-<li>Propositions and basic results
-<ol>
-<li>Unfolding of RNN</li>
-<li>Maximum likelihood method</li>
-<li>ML for the regression problem</li>
-<li>ML for the classification problem</li>
-</ol>
-</li>
-<li>RNN implementation
-<ol>
-<li>Data pre-processing</li>
-<li>Output layer
-<ol>
-<li>Classification</li>
-<li>Regression</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-
-            </section>
-        
-            <section >
-                <h2><a id="user-content-overview-2" class="anchor" href="#overview-2" aria-hidden="true"></a>Overview</h2>
-<ol start="5">
-<li>Results
-<ol>
-<li>Action classification model</li>
-<li>Sequence to sequence model</li>
-<li>Decoder model</li>
-<li>ODE integrator model</li>
-</ol>
-</li>
+<li>Ornithopter trajectory optimization problem</li>
+<li>Neural Networks preliminaries</li>
+<li>Propositions and basic results</li>
+<li>RNN implementation</li>
+<li>Results</li>
 <li>Conclusions</li>
+<li>Future work</li>
 </ol>
+
+            </section>
+    
+
+
+
+    
+    <section>
+        <section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
+            <!-- .slide: data-transition="slide" data-background="#4d7e65" data-background-transition="zoom" -->
+<h2><a id="user-content-1-ornithopter-trajectory-optimization-problem" class="anchor" href="#1-ornithopter-trajectory-optimization-problem" aria-hidden="true"></a>1. Ornithopter trajectory optimization problem</h2>
+<section>
+<img data-src="./images/ornithopter.jpg" width="40%">
+</section>
+
+            </section>
+        
+            <section >
+                <h3><a id="user-content-1-ornithopter-trajectory-optimization-problem-1" class="anchor" href="#1-ornithopter-trajectory-optimization-problem-1" aria-hidden="true"></a>1. Ornithopter trajectory optimization problem</h3>
+<section>
+<img data-src="./images/trajectories.png" width="40%">
+<p>The problem we want to solve is to compute an optimal trajectory of an ornithopter connecting two given positions A and B while minimizing the energy consumption</p>
+</section>
 
             </section>
         
@@ -374,67 +349,29 @@
 
 
     
-        <section data-transition="slide" data-background="#4d7e65" data-background-transition="zoom">
-            
-            <!-- .slide: data-transition="slide" data-background="#4d7e65" data-background-transition="zoom" -->
-<h2><a id="user-content-1-ornithopter-trajectory-optimization-problem" class="anchor" href="#1-ornithopter-trajectory-optimization-problem" aria-hidden="true"></a>1. Ornithopter trajectory optimization problem</h2>
-<img data-src="./images/ornithopter.jpg" width="40%">
-
-            </section>
-    
-
-
-
-    
         <section >
             
-            <h3><a id="user-content-11-problem-statement" class="anchor" href="#11-problem-statement" aria-hidden="true"></a>1.1 Problem statement</h3>
-<img data-src="./images/trajectories.png" width="40%">
-<blockquote>
-<p><small>The problem we want to solve is to compute an optimal trajectory of an ornithopter connecting two given positions A and B while minimizing the energy consumption</small></p>
-</blockquote>
-
-            </section>
-    
-
-
-
-    
-        <section >
-            
-            <h3><a id="user-content-11-problem-statement---states-and-actions" class="anchor" href="#11-problem-statement---states-and-actions" aria-hidden="true"></a>1.1 Problem statement - states and actions</h3>
-
-            </section>
-    
-
-
-
-    
-        <section >
-            
-            <h3><a id="user-content-11-optimal-trajectory-as-a-sequence-of-optimal-actions" class="anchor" href="#11-optimal-trajectory-as-a-sequence-of-optimal-actions" aria-hidden="true"></a>1.1 optimal trajectory as a sequence of optimal actions</h3>
-
-            </section>
-    
-
-
-
-    
-        <section >
-            
-            <h3><a id="user-content-11-optimal-trajectory-as-a-sequence-of-optimal-states" class="anchor" href="#11-optimal-trajectory-as-a-sequence-of-optimal-states" aria-hidden="true"></a>1.1 optimal trajectory as a sequence of optimal states</h3>
-
-            </section>
-    
-
-
-
-    
-        <section >
-            
-            <h3><a id="user-content-12-the-ospa-approach" class="anchor" href="#12-the-ospa-approach" aria-hidden="true"></a>1.2 The OSPA approach</h3>
-<p>OSPA (Ornithopter Segmentation Path Planning Approach) is a novel heuristic algorithm able to efficiently compute optimal trajectories.</p>
-<p>Drawback: Time consuming. Cannot be embarked on the ornithopter for online computation.</p>
+            <h3><a id="user-content-11-the-ospa-approach" class="anchor" href="#11-the-ospa-approach" aria-hidden="true"></a>1.1 The OSPA approach</h3>
+<section style="text-align: left;">
+<p>OSPA* (Ornithopter Segmentation Path Planning Approach) is a novel heuristic algorithm able to efficiently compute optimal trajectories.</p>
+<p class="fragment highlight-red">Drawback: Time consuming. Cannot be embarked on the ornithopter for online computation.</p>
+<small>
+OSPA* [2020]:
+<ul>
+<li>Title: Kinodynamic Planning for an Energy-Efficient Autonomous Ornithopter</li>
+<li>Authors: F. Rodríguez and J. M. Díaz-Báñez and E. Sanchez-Laulhe and J. Capitán and A. Ollero</li>
+</ul>
+</small>
+</section>
+<section>
+<img data-src="./images/trajectories.png">
+</section>
+<section style="text-align: left;">
+<p><strong>Flight state:</strong> describes an ornithopter configuration in a given instant of time.
+$$s = (x, z, u, w, \theta, q)$$</p>
+<p><strong>Flight maneuver:</strong> is a control action performed by the ornithopter.
+$$a =(\delta, f)$$</p>
+</section>
 
             </section>
     
@@ -444,25 +381,101 @@
     
     <section>
         <section >
-            <h3><a id="user-content-13-the-rnn-approach" class="anchor" href="#13-the-rnn-approach" aria-hidden="true"></a>1.3 The RNN approach</h3>
+            <h3><a id="user-content-11-optimal-trajectory-as-a-sequence-of-optimal-actions" class="anchor" href="#11-optimal-trajectory-as-a-sequence-of-optimal-actions" aria-hidden="true"></a>1.1 optimal trajectory as a sequence of optimal actions</h3>
+<section style="text-align: left;">
+<p>A trajectory can be defined as a sequence of flight maneuvers $A =(a_0, a_1, a_2, a_3…a_{n-1})$ that drives the ornithopter from the start point A to the vicinity of the target B.</p>
+<p>Estimating the best action $a_i$ from a subset of them at each flight state $x_i$ constitutes a <span style="color:green">classification</span> problem</p>
+</section>
+
+            </section>
+        
+            <section >
+                <h3><a id="user-content-11-optimal-trajectory-as-a-sequence-of-optimal-states" class="anchor" href="#11-optimal-trajectory-as-a-sequence-of-optimal-states" aria-hidden="true"></a>1.1 optimal trajectory as a sequence of optimal states</h3>
+<section style="text-align: left;">
+<p>A trajectory can be defined as a sequence of flight states $S = (s_0, s_1, s_2, s_3…s_n)$ from start point A to the vicinity of point B.</p>
+<p>Predicting the sequence of flight states $x_i$ constitutes a <span style="color:green">regression</span> problem</p>
+</section>
+
+            </section>
+        
+
+    </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-12-the-rnn-approach" class="anchor" href="#12-the-rnn-approach" aria-hidden="true"></a>1.2 The RNN approach</h3>
+<section>
 <blockquote>
 <p><strong>Our proposal:</strong> contour this problem using recurrent neuronal networks.</p>
 </blockquote>
 <p>The neuronal network is tasked with learning the underlying optimal trajectory flight dynamics, which are in turn numerically estimated by the OSPA.</p>
-
-            </section>
-        
-            <section >
-                <h3><a id="user-content-13-the-rnn-approach-1" class="anchor" href="#13-the-rnn-approach-1" aria-hidden="true"></a>1.3 The RNN approach</h3>
+</section>
+<section>
 <p><strong>Way of working:</strong> OSPA is used to compute a set of optimal trajectories. The neuronal network is tasked to learning the underlying function from it.</p>
 <blockquote>
 <p><strong>Goal</strong>  obtain similar performances to OSPA with faster computation times.</p>
 </blockquote>
+</section>
 
             </section>
-        
+    
 
-    </section>
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-13-ospa-data-set" class="anchor" href="#13-ospa-data-set" aria-hidden="true"></a>1.3 OSPA data set</h3>
+<section style="text-align: left;">
+<p>In order to feed the RNN, an OSPA optimal trajectories dataset is generated, composed by:</p>
+<ul>
+<li>Initial $s_{initial}$ and target $s_{target}$ states.</li>
+<li>Sequence of flight states $S = (s_0, s_1, s_2, s_3…s_n)$.</li>
+<li>Sequence of flight maneuvers $A =(a_0, a_1, a_2, a_3…a_{n-1})$.</li>
+<li>Cost of the trajectory.</li>
+<li>Computation time.</li>
+</ul>
+</section>
+<section style="text-align: left;">
+<p>In total, 236 different trajectories are generated:</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th style="text-align:center">Initial State</th>
+<th style="text-align:center">Target State</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$X~(m)$</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">$[25,100]$</td>
+</tr>
+<tr>
+<td>$Z~(m)$</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">$[-40, 0]$</td>
+</tr>
+<tr>
+<td>$\Theta~(^\circ)$</td>
+<td style="text-align:center">$[-30,30]$</td>
+<td style="text-align:center">$30$</td>
+</tr>
+<tr>
+<td>$U_b~(m/s)$</td>
+<td style="text-align:center">$[1,4]$</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+            </section>
     
 
 
@@ -482,7 +495,7 @@
     <section>
         <section >
             <h3><a id="user-content-21-feedforward-neural-networks" class="anchor" href="#21-feedforward-neural-networks" aria-hidden="true"></a>2.1 Feedforward neural networks</h3>
-<img data-src="./images/Neuron_diagram.png">
+<img data-src="./images/Neuron_diagram.png" width="70%">
 
             </section>
         
@@ -507,26 +520,22 @@
 
 
     
-    <section>
         <section >
+            
             <h3><a id="user-content-22-nns-parametric-family" class="anchor" href="#22-nns-parametric-family" aria-hidden="true"></a>2.2 NN’s parametric family</h3>
+<section style="text-align: left;">
 <blockquote>
-<p>These equations form a parametric family ${f^*(\cdot ,;\theta )\mid \theta \in \Theta }$.</p>
+<p>These equations form a parametric family ${f^*(x;\theta )\mid \theta \in \Theta }$.</p>
 </blockquote>
-<p>where the family $f^*(\cdot ,;\theta)$ is given by the NN architecture and the parameters $\theta$ correspond to the NN weights $w_{ji}^k$.</p>
-
-            </section>
-        
-            <section >
-                <h3><a id="user-content-22-nns-parametric-family-1" class="anchor" href="#22-nns-parametric-family-1" aria-hidden="true"></a>2.2 NN’s parametric family</h3>
+<p>where the family $f^*( x ;\theta)$ is given by the NN architecture and the parameters $\theta$ correspond to the NN weights $w_{ji}^k$.</p>
+</section>
+<section>
 <blockquote>
 <p>The goal can be reformulated as getting the best approximate $f^{\ast}(x;\hat{\theta})$ to the true underlying function $f$, which is in turn characterized by the OSPA optimal trajectory data set.</p>
 </blockquote>
+</section>
 
             </section>
-        
-
-    </section>
     
 
 
@@ -534,42 +543,22 @@
     
         <section >
             
-            <h3><a id="user-content-23-universal-approximator-theorem" class="anchor" href="#23-universal-approximator-theorem" aria-hidden="true"></a>2.3 Universal approximator theorem</h3>
-<blockquote>
-<p>Thanks to the Universal approximator theorem, $f^{\ast}(x;\hat{\theta})$ can approximate $f$ as much as desired.</p>
-</blockquote>
-<p>The theorem is met since a continuous function on a closed and bounded subset of $R^N$ is Borel measurable.</p>
-
-            </section>
-    
-
-
-
-    
-    <section>
-        <section >
             <h3><a id="user-content-24-nn-architecture" class="anchor" href="#24-nn-architecture" aria-hidden="true"></a>2.4 NN architecture</h3>
-<p>The neuronal network architecture and activation functions define the capacity the parametric family
-$${f^\ast(x;\theta )\mid \theta \in \Theta }$$</p>
-<p>The capacity is determined by:</p>
+<section style="text-align: left;">
+<p>The family ${f^\ast(x;\theta )\mid \theta \in \Theta }$ is defined by the neuronal network architecture and activation functions, determined by:</p>
 <ul>
 <li>Depth and width of the network: number of parameters available.</li>
-<li>Activation functions and general architecture:  set of functions that can be learned.</li>
+<li>Activation functions and general architecture: set of functions that can be learned.</li>
 </ul>
-
-            </section>
-        
-            <section >
-                <h3><a id="user-content-24-nn-architecture-1" class="anchor" href="#24-nn-architecture-1" aria-hidden="true"></a>2.4 NN architecture</h3>
+</section>
+<section style="text-align: left;">
 <p>Due to the complexity of the ornithopter problem, our NN architecture must have the capacity to capture temporal dynamic behaviors.</p>
 <blockquote>
 <p><strong>Proposal:</strong>  use a recurrent neural network with just one single layer to learn the OSPA underlaying trajectory flight dynamics</p>
 </blockquote>
+</section>
 
             </section>
-        
-
-    </section>
     
 
 
@@ -578,7 +567,10 @@ $${f^\ast(x;\theta )\mid \theta \in \Theta }$$</p>
         <section >
             
             <h3><a id="user-content-24-nn-parameter-optimization" class="anchor" href="#24-nn-parameter-optimization" aria-hidden="true"></a>2.4 NN parameter optimization</h3>
-<p>Loss function</p>
+<section style="text-align: left;">
+<p>The optimal parameters $\theta^{*}$ for a given family are obtained by the optimization of a <span style="color:green">Loss function</span> through the <span style="color:green">Gradient Descendent</span> algorithm</p>
+<p>$$\theta^{t+1}= \theta^{t} - \alpha \frac{\partial J(x, \theta^{t})}{\partial \theta}$$</p>
+</section>
 
             </section>
     
@@ -589,21 +581,24 @@ $${f^\ast(x;\theta )\mid \theta \in \Theta }$$</p>
     <section>
         <section >
             <h3><a id="user-content-25-recurrent-neural-networks" class="anchor" href="#25-recurrent-neural-networks" aria-hidden="true"></a>2.5 Recurrent Neural networks</h3>
-<p>A recurrent neural network (RNN) is a class of artificial neural networks where connections between nodes form a directed graph along a temporal sequence. These connections allow previous outputs to be used as inputs while having hidden states.</p>
+<section style="text-align: left;">
+<img data-src="./images/RNN_architecture.png">
+<p>Connections between nodes form a directed graph along a temporal sequence. These connections allow previous outputs to be used as inputs.</p>
+</section>
 
             </section>
         
             <section >
                 <h3><a id="user-content-25-lstm-recurrent-neural-networks" class="anchor" href="#25-lstm-recurrent-neural-networks" aria-hidden="true"></a>2.5 LSTM Recurrent Neural networks</h3>
-<img data-src="./images/RNN gates.png" width="50%">
-<small>
+<img data-src="./images/RNN_gates.png" width="55%">
 <span>
+<small>
 \[\begin{aligned}
 &a_t =g_1( b_a + W_{aa}a_{t-1}+W_{ax}x_t) \\
 &y_t = g_2(b_y + W_{ya}a_t)
 \end{aligned} \]
-</span>
 </small>
+</span>
 
             </section>
         
@@ -627,8 +622,11 @@ $${f^\ast(x;\theta )\mid \theta \in \Theta }$$</p>
     
         <section >
             
-            <h2><a id="user-content-31-rnn-unfolding" class="anchor" href="#31-rnn-unfolding" aria-hidden="true"></a>3.1 RNN unfolding</h2>
-<img data-src="./images/RNN architecture.png">
+            <h3><a id="user-content-31-universal-approximator-theorem" class="anchor" href="#31-universal-approximator-theorem" aria-hidden="true"></a>3.1 Universal approximator theorem</h3>
+<blockquote>
+<p>Thanks to the Universal approximator theorem, $f^{\ast}(x;\hat{\theta})$ can approximate $f$ as much as desired.</p>
+</blockquote>
+<p>The theorem is met since $f$ is a continuous function on a closed and bounded subset of $R^N$ is Borel measurable.</p>
 
             </section>
     
@@ -636,27 +634,19 @@ $${f^\ast(x;\theta )\mid \theta \in \Theta }$$</p>
 
 
     
-    <section>
         <section >
-            <h2><a id="user-content-31-rnn-unfolding-1" class="anchor" href="#31-rnn-unfolding-1" aria-hidden="true"></a>3.1 RNN unfolding</h2>
+            
+            <h2><a id="user-content-32-rnn-unfolding" class="anchor" href="#32-rnn-unfolding" aria-hidden="true"></a>3.2 RNN unfolding</h2>
+<section>
+<img data-src="./images/RNN_architecture.png">
+</section>
+<section>
 <blockquote>
 <p><strong>Theorem:</strong> the unfolding property can only be applied if the following hypothesis is met: the conditional probability distribution over the variables at t+1 given the variables at time t, is stationary.</p>
 </blockquote>
+</section>
 
             </section>
-        
-            <section >
-                <h3><a id="user-content-32-maximum-likelihood" class="anchor" href="#32-maximum-likelihood" aria-hidden="true"></a>3.2 Maximum likelihood</h3>
-<img data-src="./images/ML concept.png" width="40%">
-<script type="math/tex; mode=display">
-  \theta_{ML} =  \arg\max_{\theta}  p_{model}(X;\theta) = \arg\max_{\theta}
-\prod_{i=1}^m p_{model}(x_i ;\theta)
-</script>
-
-            </section>
-        
-
-    </section>
     
 
 
@@ -664,10 +654,17 @@ $${f^\ast(x;\theta )\mid \theta \in \Theta }$$</p>
     
         <section >
             
-            <h3><a id="user-content-32-ml-to-estimate-optimal-parameters" class="anchor" href="#32-ml-to-estimate-optimal-parameters" aria-hidden="true"></a>3.2 ML to estimate optimal parameters</h3>
+            <h3><a id="user-content-33-maximum-likelihood" class="anchor" href="#33-maximum-likelihood" aria-hidden="true"></a>3.3 Maximum likelihood</h3>
+<section>
+<img data-src="./images/ML_concept.png" width="50%">
+<p>$$\theta_{ML} =  \arg\max_{\theta}  p_{model}(X;\theta) = \arg\max_{\theta}
+\prod_{i=1}^m p_{model}(x_i ;\theta)$$</p>
+</section>
+<section>
 <blockquote>
 <p><strong>Proposal:</strong> the ML method is proposed to estimate the parameter value $\hat{\theta}$ for a given family, so that under the assumed model $f^{\ast}(x;\hat{\theta})$, the observed data is the most probable.</p>
 </blockquote>
+</section>
 
             </section>
     
@@ -677,7 +674,26 @@ $${f^\ast(x;\theta )\mid \theta \in \Theta }$$</p>
     
         <section >
             
-            <h3><a id="user-content-32-problem-types--regression-and-classification" class="anchor" href="#32-problem-types--regression-and-classification" aria-hidden="true"></a>3.2 problem types:  regression and classification</h3>
+            <h3><a id="user-content-33-kl-divergence" class="anchor" href="#33-kl-divergence" aria-hidden="true"></a>3.3 KL Divergence</h3>
+<section>
+<blockquote>
+<p><strong>Proposition:</strong>  It is equivalent to use the Log-likelihood or the KL divergence as loss functions to compute the optimal parameters for our NN regression problem.</p>
+</blockquote>
+<p>$$\displaystyle D_{\text{KL}}(p_{data}\parallel p_{model})=-H_{p_{data}} - L(x;\theta)$$</p>
+</section>
+<section style="text-align: left;">
+<p>The KL divergence loss function represents the amount of information lost when $p_{model}$ is used to approximate $p_{data}$.</p>
+</section>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-331-problem-types--regression-and-classification" class="anchor" href="#331-problem-types--regression-and-classification" aria-hidden="true"></a>3.3.1 problem types:  regression and classification</h3>
 
             </section>
     
@@ -687,28 +703,21 @@ $${f^\ast(x;\theta )\mid \theta \in \Theta }$$</p>
     
     <section>
         <section >
-            <h3><a id="user-content-332-kl-divergence" class="anchor" href="#332-kl-divergence" aria-hidden="true"></a>3.3.2 KL Divergence</h3>
-<blockquote>
-<p><small> <strong>Proposition:</strong>  It is equivalent to use the Log-likelihood or the KL divergence as loss functions to compute the optimal parameters for our NN regression problem.</p>
-</blockquote>
-<script type="math/tex; mode=display">
-   \displaystyle D_{\text{KL}}(p_{data}\parallel p_{model})=-H_{p_{data}} - L(x;\theta)
-</script>
-</small>
-<h3><a id="user-content-33-ml-applied-to-the-regression-problem" class="anchor" href="#33-ml-applied-to-the-regression-problem" aria-hidden="true"></a>3.3 ML applied to the Regression problem</h3>
-<small>
-In the regression problem, the RNN aims to output the best possible approximation to the values of the true states in $R^6$ given by an OSPA trajectory.
+            <h3><a id="user-content-33-ml-applied-to-the-regression-problem" class="anchor" href="#33-ml-applied-to-the-regression-problem" aria-hidden="true"></a>3.3 ML applied to the Regression problem</h3>
+<section style="text-align: left;">
+<p>In the regression problem, the RNN aims to output the best possible approximation to the values of the true states in $R^6$ given by an OSPA trajectory.</p>
 <p>$$y_i = \hat{y_i} + e_i$$</p>
-<p>where  $\hat{y_i}$ is our prediction, $y_i$ is the real value and $e_i$ is the error due to non modeled aspects which is assumed to be Gaussian
-</small></p>
+<p>where  $\hat{y_i}$ is our prediction, $y_i$ is the real value and $e_i$ is the error due to non modeled aspects which is assumed to be Gaussian</p>
+</section>
 
             </section>
         
             <section >
                 <h3><a id="user-content-331-mean-squared-error" class="anchor" href="#331-mean-squared-error" aria-hidden="true"></a>3.3.1 Mean squared Error</h3>
 <blockquote>
-<p><small> <strong>Proposition:</strong> given the above mentioned hypothesis, it is equivalent to use the Log Likelihood or the Mean Squared Error as loss functions for our NN.</p>
+<p><strong>Proposition:</strong> given the above mentioned hypothesis, it is equivalent to use the Log Likelihood or the Mean Squared Error as loss functions for our NN.</p>
 </blockquote>
+<small>
 <script type="math/tex; mode=display">
    \theta_{ML} =  \arg\max_{\theta} L= \arg\max_{\theta}m\log\frac {1}{\sigma {\sqrt {2\pi }}}-\sum_{i=1}^m {\frac {1}{2}}\left({\frac {y_i - \hat{y_i}  }{\sigma }}\right)^{2} = \arg\max_{\theta}\sum_{i=1}^m {\frac {1}{2}}\left({y_i - \hat{y_i}  }\right)^{2}
 </script>
@@ -716,15 +725,6 @@ In the regression problem, the RNN aims to output the best possible approximatio
 
             </section>
         
-            <section >
-                <h3><a id="user-content-332-kl-divergence-1" class="anchor" href="#332-kl-divergence-1" aria-hidden="true"></a>3.3.2 KL Divergence</h3>
-<small>
-The KL divergence loss function represents the amount of information lost when $p_{model}$ is used to approximate $p_{data}$.
-<p>Or in other words, when our neural network $f^{\ast}(x;\hat{\theta})$ is used instead of the real source of data, which is our OSPA planner.
-</small></p>
-
-            </section>
-        
 
     </section>
     
@@ -732,49 +732,45 @@ The KL divergence loss function represents the amount of information lost when $
 
 
     
-    <section>
         <section >
+            
             <h3><a id="user-content-34-classification-problem" class="anchor" href="#34-classification-problem" aria-hidden="true"></a>3.4 Classification problem</h3>
-<small>
-The ornithopter possible action data set is actually a finite set of 35 different action tuples. This is due to the methodology of the OSPA to compute the optimal path, which requires a finite set of possible action outcomes in order to obtain a search tree.
-<p>In the classification model each action $a_k$ is treated as a different category, leading to 35 different categories: $$a_k = (\delta_k, f_k), \ k =1,…, 35$$</p>
-</small>
+<section style="text-align: left;">
+<p>The ornithopter possible action data set is actually a finite set of 35 different action tuples.</p>
+<p>In the classification model each action $a_k$ is treated as a different category:
+$$a_k = (\delta_k, f_k), \ k =1,…, 35$$</p>
+</section>
+<section style="text-align: left;">
+<p>In this case, the RNN will output the probability that each category has to be selected:</p>
+<p>$$\hat{y_k} = p(y_k|x,\theta)$$</p>
+<p>where $\hat{y_k}$ is the vector with the predicted probabilities for each category $k$ and $y_k$ is the “one hot” representation of each category</p>
+</section>
 
             </section>
-        
-            <section >
-                <h3><a id="user-content-34-classification-problem-1" class="anchor" href="#34-classification-problem-1" aria-hidden="true"></a>3.4 Classification problem</h3>
-<small>
-In this case, we want the RNN to output the probability that each category has to be selected:
- $$\hat{y_k} = p(y_k|x,\theta)$$
-where $\hat{y_k}$ is the vector with the predicted probabilities for each category $k$ and $y_k$ is the "one hot" representation of each category
-</small>
+    
 
-            </section>
-        
-            <section >
-                <h3><a id="user-content-341-cross-entropy" class="anchor" href="#341-cross-entropy" aria-hidden="true"></a>3.4.1 Cross Entropy</h3>
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-341-cross-entropy" class="anchor" href="#341-cross-entropy" aria-hidden="true"></a>3.4.1 Cross Entropy</h3>
+<section>
 <blockquote>
-<p><small> <strong>Proposition:</strong> It is equivalent to use the Log-likelihood or the CategoricalCross Entropy as loss function for our NN classification problem.</p>
+<p><strong>Proposition:</strong> It is equivalent to use the Log-likelihood or the Cross Entropy as loss function for our NN classification problem.</p>
 </blockquote>
+<small>
 <script type="math/tex; mode=display">
    \theta_{ML} =  \arg\max_{\theta} \sum_{i=1}^m \log p(y|x_i ;\theta)= \arg\max_{\theta} - \sum_{i=1}^m H(p(y_i), \hat{y}_i)
 </script>
 </small>
+</section>
+<section style="text-align: left;">
+<p>The cross entropy loss function can be interpreted as the expected message-length per datum when a wrong distribution $p_{model}$ is assumed while the data actually follows a distribution $p_{data}$.</p>
+<p>Or, when our neural network $f^{\ast}(x;\hat{\theta})$ is used instead of the real source of data, the OSPA planner.</p>
+</section>
 
             </section>
-        
-            <section >
-                <h3><a id="user-content-341-cross-entropy-1" class="anchor" href="#341-cross-entropy-1" aria-hidden="true"></a>3.4.1 Cross Entropy</h3>
-<small>
-The cross entropy loss function can be interpreted as the expected message-length per datum when a wrong distribution $p_{model}$ is assumed while the data actually follows a distribution $p_{data}$.
-<p>Or in other words, when our neural network $f^{\ast}(x;\hat{\theta})$ is used instead of the real source of data, which is our OSPA planner.
-</small></p>
-
-            </section>
-        
-
-    </section>
     
 
 
@@ -823,7 +819,7 @@ $$\vec{x}.append(x_{target})$$</li>
         <section >
             <h3><a id="user-content-421-classification-output-layer" class="anchor" href="#421-classification-output-layer" aria-hidden="true"></a>4.2.1 classification output layer</h3>
 <p>The output layer consists on a dense layer with a softmax activation function</p>
-  <img data-src="./images/Output classif.png" width = "60%">
+  <img data-src="./images/Output_classif.png" width = "60%">
 <p>It transforms the output into the probability of predicting each specific class</p>
 
             </section>
@@ -850,7 +846,7 @@ $$\vec{x}.append(x_{target})$$</li>
             
             <h3><a id="user-content-422-regression-output-layer" class="anchor" href="#422-regression-output-layer" aria-hidden="true"></a>4.2.2 regression output layer</h3>
 <p>The output layer consists on a dense layer with a linear activation function</p>
-  <img data-src="./images/Output regression.png" width = "50%">
+  <img data-src="./images/Output_regression.png" width = "50%">
 <p>It transforms the output into the estimated value of each component</p>
 
             </section>
@@ -870,103 +866,12 @@ $$\vec{x}.append(x_{target})$$</li>
 
 
     
-    <section>
         <section >
+            
             <h3><a id="user-content-51-action-classification-model" class="anchor" href="#51-action-classification-model" aria-hidden="true"></a>5.1 action classification model</h3>
- <img data-src="./images/S2A step.png">
+ <img data-src="./images/S2A_step.png">
 
             </section>
-        
-            <section >
-                <h3><a id="user-content-511-action-classification-model" class="anchor" href="#511-action-classification-model" aria-hidden="true"></a>5.1.1 action classification model</h3>
-<section style="text-align: left;">
-The configuration is as follows:
-<ul>
-<li>Input layer: last predicted state $x_{t-1}$</li>
-<li>The recurrent layer: is expected to learn the function $h_{t} = f(h_{t-1}; x_{t-1})$</li>
-<li>Output layer: probabilities for the next action to apply a_{t}.</li>
-<li>Fixed function: $x_t=F(x_{t-1};a_t)$</li>
-</ul>
-</section>
-
-            </section>
-        
-            <section >
-                <h3><a id="user-content-511-action-classification-model-1" class="anchor" href="#511-action-classification-model-1" aria-hidden="true"></a>5.1.1 action classification model</h3>
-<p>Network summary</p>
-<table>
-<thead>
-<tr>
-<th>Layer</th>
-<th style="text-align:center">Output shape</th>
-<th style="text-align:center">parameter number</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>LSTM</td>
-<td style="text-align:center">[None, None, 11]</td>
-<td style="text-align:center">792</td>
-</tr>
-<tr>
-<td>Dense</td>
-<td style="text-align:center">[None, None, 35]</td>
-<td style="text-align:center">420</td>
-</tr>
-<tr>
-<td>Lambda</td>
-<td style="text-align:center">[None, None, 6]</td>
-<td style="text-align:center">0</td>
-</tr>
-</tbody>
-</table>
-
-            </section>
-        
-
-    </section>
-    
-
-
-
-    
-    <section>
-        <section >
-            <h3><a id="user-content-512-action-classification-training" class="anchor" href="#512-action-classification-training" aria-hidden="true"></a>5.1.2 action classification training</h3>
-<p>We use the KL divergence loss function as the measure of the dissimilarity between these two distributions
-$$\displaystyle D_{\text{KL}}(p_{data}\parallel p_{model})=\sum_{x\in {\mathcal{X}}}p(a|x)\log \left({\frac {p(a|x)}{p(a|x;\theta)}}\right)$$
-to estimate $\hat{a} = p(a|x;\theta)$ as close as possible to the true action category value $p(a|x)$.</p>
-
-            </section>
-        
-            <section >
-                <h3><a id="user-content-512-action-classification-training-1" class="anchor" href="#512-action-classification-training-1" aria-hidden="true"></a>5.1.2 action classification training</h3>
-<img data-src="./images/S2A loss curve.png">
-
-            </section>
-        
-
-    </section>
-    
-
-
-
-    
-    <section>
-        <section >
-            <h3><a id="user-content-513-action-classification-results" class="anchor" href="#513-action-classification-results" aria-hidden="true"></a>5.1.3 action classification results</h3>
-<img data-src="./images/S2A trajectory.png" width = 45%>
-<img data-src="./images/S2A trajectory components.png" width = 45%>
-
-            </section>
-        
-            <section >
-                <h3><a id="user-content-513-action-classification---metrics" class="anchor" href="#513-action-classification---metrics" aria-hidden="true"></a>5.1.3 action classification - metrics</h3>
-
-            </section>
-        
-
-    </section>
     
 
 
@@ -974,8 +879,125 @@ to estimate $\hat{a} = p(a|x;\theta)$ as close as possible to the true action ca
     
         <section >
             
-            <h3><a id="user-content-513-action-classification-results-1" class="anchor" href="#513-action-classification-results-1" aria-hidden="true"></a>5.1.3 action classification results</h3>
-<p>Results summary</p>
+            <h3><a id="user-content-512-action-classification-training" class="anchor" href="#512-action-classification-training" aria-hidden="true"></a>5.1.2 action classification training</h3>
+<section style="text-align: left;">
+<p>We use the KL divergence loss function as the measure of the dissimilarity between these two distributions
+$$\displaystyle D_{\text{KL}}(p_{data}\parallel p_{model})=\sum_{x\in {\mathcal{X}}}p(a|x)\log \left({\frac {p(a|x)}{p(a|x;\theta)}}\right)$$
+to estimate $\hat{a} = p(a|x;\theta)$ as close as possible to the true action category value $p(a|x)$.</p>
+</section>
+<section>
+<img data-src="./images/S2A_loss_curve.png">
+</section>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-513-action-classification-results" class="anchor" href="#513-action-classification-results" aria-hidden="true"></a>5.1.3 action classification results</h3>
+<section>
+<img data-src="./images/S2A_trajectory.png" width = "75%">
+</section>
+<section>
+<img data-src="./images/S2A_trajectory_components.png" width = "75%">
+</section>
+<section style="text-align: left;">
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th style="text-align:center">Cost (W)</th>
+<th style="text-align:center">Time (s)</th>
+<th style="text-align:center">Precision (m)</th>
+<th style="text-align:center">Trajectory error (m)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OSPA</td>
+<td style="text-align:center">34.68</td>
+<td style="text-align:center">520</td>
+<td style="text-align:center"><span style="color:green">2.84</span></td>
+<td style="text-align:center">N/A</td>
+</tr>
+<tr>
+<td>Action prediction</td>
+<td style="text-align:center">37.25</td>
+<td style="text-align:center"><span style="color:green">0.43</span></td>
+<td style="text-align:center">6.29</td>
+<td style="text-align:center">3.85</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-513-results---metrics" class="anchor" href="#513-results---metrics" aria-hidden="true"></a>5.1.3 Results - metrics</h3>
+<section style="text-align: left;">
+<ul>
+<li><strong>Cost:</strong> $C=\sum_{i=0}^{n-1}c_i$,  the sum of the energy consumption of each of the actions.</li>
+<li><strong>Time (s):</strong> is the total elapsed time in computing the full trajectory.</li>
+<li><strong>Precision (s):</strong> is the distance in the XZ-plane from the final state to the target</li>
+<li><strong>Trajectory error (m):</strong> is the mean of distance in the Z axis between the OSPA and the RNN trajectories at 10 given intermediary X-positions.</li>
+</ul>
+</section>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-521-sequence-to-sequence-model" class="anchor" href="#521-sequence-to-sequence-model" aria-hidden="true"></a>5.2.1 sequence to sequence model</h3>
+ <img data-src="./images/RNN_s2s_draw.png" height = "100%">
+ <img data-src="./images/Many_to_many.png" width = "30%">
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-522-sequence-to-sequence-training" class="anchor" href="#522-sequence-to-sequence-training" aria-hidden="true"></a>5.2.2 sequence to sequence training</h3>
+<section style="text-align: left;">
+<p>We use the MSE loss function as the measure of the dissimilarity between $p_{model}(x; \theta)$ and $p_{data}(x)$</p>
+<p>$$\theta_{ML} =\theta_{mMSE}= \arg\max_{\theta}\sum_{i=1}^m {\frac {1}{2}}\left({y_i - \hat{y_i}  }\right)^{2}$$</p>
+<p>to estimate $\hat{y}$ as close as possible to the true state value $y$.</p>
+</section>
+<section>
+<img data-src="./images/Decoder_loss_curve.png" width = "75%">
+</section>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-523-sequence-to-sequence-results" class="anchor" href="#523-sequence-to-sequence-results" aria-hidden="true"></a>5.2.3 sequence to sequence results</h3>
+<section>
+<img data-src="./images/Medium_distance_sequential_trajectory.png" width = "70%">
+</section>
+<section>
+<img data-src="./images/Medium_distance_sequential_trajectory_components.png" width = "70%">
+</section>
+<section style="text-align: left;">
 <table>
 <thead>
 <tr>
@@ -995,76 +1017,15 @@ to estimate $\hat{a} = p(a|x;\theta)$ as close as possible to the true action ca
 <td style="text-align:center">N/A</td>
 </tr>
 <tr>
-<td>Action prediction</td>
-<td style="text-align:center">37.25</td>
-<td style="text-align:center">0.43</td>
-<td style="text-align:center">6.29</td>
-<td style="text-align:center">3.85</td>
+<td><span style="color:green">Seq 2 seq</span></td>
+<td style="text-align:center">N/A</td>
+<td style="text-align:center"><span style="color:green">0.46</span></td>
+<td style="text-align:center"><span style="color:green">1.40</span></td>
+<td style="text-align:center"><span style="color:green">1.59</span></td>
 </tr>
 </tbody>
 </table>
-
-            </section>
-    
-
-
-
-    
-    <section>
-        <section data-transition="slide" data-background="#e38c22" data-background-transition="zoom">
-            <h2><a id="user-content-6-conclusions" class="anchor" href="#6-conclusions" aria-hidden="true"></a>6 Conclusions</h2>
-<!-- .slide: data-transition="slide" data-background="#e38c22" data-background-transition="zoom" -->
-
-            </section>
-        
-            <section >
-                <h3><a id="user-content-61-conclusions" class="anchor" href="#61-conclusions" aria-hidden="true"></a>6.1 Conclusions</h3>
-<section style="text-align: left;">
-<p>On the theoretical side, all neural network expressions or choices have been mathematically derived or supported by three pillars:</p>
-<ol>
-<li>The universal estimator theorem.</li>
-<li>The development of the NN algebraic equations derived from the neuron ones.</li>
-<li>The use of the maximum likelihood and its derivations to determine the optimal parameters for the paramedic family formed by the NN.</li>
-</ol>
 </section>
-
-            </section>
-        
-            <section >
-                <h3><a id="user-content-62-conclusions" class="anchor" href="#62-conclusions" aria-hidden="true"></a>6.2 Conclusions</h3>
-<section style="text-align: left;">
-<p>On the applications side, several RNN architectures have been applied to the specific problem of the ornithopter trajectory optimization:</p>
-<ol>
-<li>The RNN has outperformed the OSPA method both in time (0.5s vs 520s) and precision to the target (1.19m vs 2.84m).</li>
-<li>The RNN has been able to learn the underlying flight dynamics of the problem.</li>
-<li>The ODE Integrator architecture has given a physically interpreted RNN behaviour.</li>
-<li>All the results and choices have been justified using the mathematical background developed at the beginning of this thesis.</li>
-</ol>
-</section>
-
-            </section>
-        
-
-    </section>
-    
-
-
-
-    
-        <section >
-            
-            <h3><a id="user-content-7-future-work" class="anchor" href="#7-future-work" aria-hidden="true"></a>7 Future work</h3>
-
-            </section>
-    
-
-
-
-    
-        <section >
-            
-            <h3><a id="user-content-thank-you" class="anchor" href="#thank-you" aria-hidden="true"></a>Thank you!</h3>
- <img data-src="./images/QR paskymailweb.png">
 
             </section>
     
@@ -1085,10 +1046,253 @@ to estimate $\hat{a} = p(a|x;\theta)$ as close as possible to the true action ca
     
         <section >
             
-            <h3><a id="user-content-54-ode-integrator-model" class="anchor" href="#54-ode-integrator-model" aria-hidden="true"></a>5.4 ODE integrator model</h3>
- <img data-src="./images/ODE.png">
-<hr>
+            <h3><a id="user-content-532-decoder-training" class="anchor" href="#532-decoder-training" aria-hidden="true"></a>5.3.2 decoder training</h3>
+<section style="text-align: left;">
+<p>The network training is performed in exactly the same manner as for the sequence to sequence configuration. Actually, we are going to re-use the same optimal network parameters $\theta^*$.</p>
+</section>
 
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-533-decoder-results" class="anchor" href="#533-decoder-results" aria-hidden="true"></a>5.3.3 decoder results</h3>
+<section>
+<img data-src="./images/Medium_distance_best_fit_trajectory_2.png" width = "70%">
+</section>
+<section>
+<img data-src="./images/Medium_distance_best_fit_trajectory_components_2.png" width = "70%">
+</section>
+<section style="text-align: left;">
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th style="text-align:center">Cost (W)</th>
+<th style="text-align:center">Time (s)</th>
+<th style="text-align:center">Precision (m)</th>
+<th style="text-align:center">Trajectory error (m)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OSPA</td>
+<td style="text-align:center">34.68</td>
+<td style="text-align:center">520</td>
+<td style="text-align:center">2.84</td>
+<td style="text-align:center">N/A</td>
+</tr>
+<tr>
+<td>Seq 2 seq</td>
+<td style="text-align:center">N/A</td>
+<td style="text-align:center">0.46</td>
+<td style="text-align:center">1.40</td>
+<td style="text-align:center">1.59</td>
+</tr>
+<tr>
+<td><span style="color:green">Decoder</span></td>
+<td style="text-align:center">N/A</td>
+<td style="text-align:center">0.54</td>
+<td style="text-align:center"><span style="color:green">1.19</span></td>
+<td style="text-align:center"><span style="color:green">1.56</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-541-ode-integrator-model" class="anchor" href="#541-ode-integrator-model" aria-hidden="true"></a>5.4.1 ODE integrator model</h3>
+<section>
+ <img data-src="./images/ODE.png">
+</section>
+<section style="text-align: left;">
+<p>This configuration describes Euler’s formula for the integration of the unknown function F over the time steps $\Delta t$</p>
+<p>$$x_{t} = x_{t-1} + \Delta t*F(x_{t})$$</p>
+<p>Which approximates:</p>
+<p>$$x_{t} =f(x_0;t) =\int_{t_0}^t f^{’}(x;t),{dt} +x_0$$</p>
+</section>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-542-ode-integrator-model-training" class="anchor" href="#542-ode-integrator-model-training" aria-hidden="true"></a>5.4.2 ODE integrator model training</h3>
+<section style="text-align: left;">
+<p>Like the decoder, the training is performed using the same configuration as for the sequence to sequence configuration, using this time Ragged Tensors instead of padding during the implementation in Keras.</p>
+</section>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-543-ode-integrator-model-results" class="anchor" href="#543-ode-integrator-model-results" aria-hidden="true"></a>5.4.3 ODE integrator model results</h3>
+<section>
+<img data-src="./images/ResNet_trajectory.png" width = "70%">
+</section>
+<section>
+<img data-src="./images/ResNet_trajectory_components.png" width = "70%">
+</section>
+<section style="text-align: left;">
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th style="text-align:center">Cost (W)</th>
+<th style="text-align:center">Time (s)</th>
+<th style="text-align:center">Precision (m)</th>
+<th style="text-align:center">Trajectory error (m)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OSPA</td>
+<td style="text-align:center">34.68</td>
+<td style="text-align:center">520</td>
+<td style="text-align:center">2.84</td>
+<td style="text-align:center">N/A</td>
+</tr>
+<tr>
+<td>Decoder</td>
+<td style="text-align:center">N/A</td>
+<td style="text-align:center">0.54</td>
+<td style="text-align:center"><span style="color:green">1.19</span></td>
+<td style="text-align:center"><span style="color:green">1.56</span></td>
+</tr>
+<tr>
+<td><span style="color:green">ODE integrator</span></td>
+<td style="text-align:center">N/A</td>
+<td style="text-align:center">0.76</td>
+<td style="text-align:center"><span style="color:green">1.32</span></td>
+<td style="text-align:center"><span style="color:green">1.55</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+            </section>
+    
+
+
+
+    
+        <section data-transition="slide" data-background="#e38c22" data-background-transition="zoom">
+            
+            <h2><a id="user-content-6-conclusions" class="anchor" href="#6-conclusions" aria-hidden="true"></a>6 Conclusions</h2>
+<!-- .slide: data-transition="slide" data-background="#e38c22" data-background-transition="zoom" -->
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-61-conclusions" class="anchor" href="#61-conclusions" aria-hidden="true"></a>6.1 Conclusions</h3>
+<section style="text-align: left;">
+<p>On the theoretical side, expressions and choices derived or supported by:</p>
+<ol>
+<li>The <span style="color:green">universal estimator theorem</span>.</li>
+<li>The <span style="color:green">NN algebraic equations</span>.</li>
+<li>The use of the <span style="color:green">maximum likelihood</span> and <span style="color:green">information theory</span> to determine optimal parameters.</li>
+</ol>
+</section>
+<section style="text-align: left;">
+<p>On the application side:</p>
+<table>
+<thead>
+<tr>
+<th>Algorithm</th>
+<th style="text-align:center">Cost (W)</th>
+<th style="text-align:center">Time (s)</th>
+<th style="text-align:center">Precision (m)</th>
+<th style="text-align:center">Trajectory error (m)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OSPA</td>
+<td style="text-align:center">34.68</td>
+<td style="text-align:center">520</td>
+<td style="text-align:center">2.84</td>
+<td style="text-align:center">N/A</td>
+</tr>
+<tr>
+<td>Action</td>
+<td style="text-align:center">37.25</td>
+<td style="text-align:center">0.43</td>
+<td style="text-align:center">6.29</td>
+<td style="text-align:center">3.85</td>
+</tr>
+<tr>
+<td>Decoder</td>
+<td style="text-align:center">N/A</td>
+<td style="text-align:center">0.54</td>
+<td style="text-align:center">1.19</td>
+<td style="text-align:center">1.56</td>
+</tr>
+<tr>
+<td>ODE int.</td>
+<td style="text-align:center">N/A</td>
+<td style="text-align:center">0.76</td>
+<td style="text-align:center">1.32</td>
+<td style="text-align:center">1.55</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section>
+<p>Code open and available in Github: <a href="https://github.com/paskymail/Neuronal_Networks">https://github.com/paskymail/Neuronal_Networks</a></p>
+</section>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-7-future-work" class="anchor" href="#7-future-work" aria-hidden="true"></a>7 Future work</h3>
+<section style="text-align: left;">
+<p>Further investigation lines:</p>
+<ol>
+<li>Use of <span style="color:green">Deep NNs</span>.</li>
+<li>Use of the <span style="color:green">information bottleneck theorem</span> to explore Deep NNs.</li>
+<li>Gathered and use <span style="color:green">additional training data</span>.</li>
+<li>Integration of <span style="color:green">additional features</span> (i.e. obstacles).</li>
+<li>Include additional trajectory <span style="color:green">optimization metrics</span>.</li>
+</ol>
+</section>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-thank-you" class="anchor" href="#thank-you" aria-hidden="true"></a>Thank you!</h3>
+ <img data-src="./images/QR_paskymailweb.png">
             </section>
     
 

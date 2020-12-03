@@ -2,7 +2,7 @@
 theme : "Beige"
 transition: "slide"
 highlightTheme: "monokai"
-logoImg: "./images/QR paskymailweb.png"
+logoImg: "./images/QR_paskymailweb.png"
 slideNumber: false
 title: "Recurrent neural networks for ornithopter trajectory optimization"
 ---
@@ -11,7 +11,7 @@ title: "Recurrent neural networks for ornithopter trajectory optimization"
 
 Scan this QR to follow the presentation on your mobile phone
 
-<img data-src="./images/QR paskymailweb.png">
+<img data-src="./images/QR_paskymailweb.png">
 
 ::: 
 
@@ -265,7 +265,7 @@ $$\theta^{t+1}= \theta^{t} - \alpha \frac{\partial J(x, \theta^{t})}{\partial \t
 
 <section style="text-align: left;">
 
-<img data-src="./images/RNN architecture.png">
+<img data-src="./images/RNN_architecture.png">
 
 Connections between nodes form a directed graph along a temporal sequence. These connections allow previous outputs to be used as inputs.
 
@@ -274,7 +274,7 @@ Connections between nodes form a directed graph along a temporal sequence. These
 
 ### 2.5 LSTM Recurrent Neural networks
 
-<img data-src="./images/RNN gates.png" width="55%">
+<img data-src="./images/RNN_gates.png" width="55%">
 <span>
 <small>
 \[\begin{aligned}
@@ -304,7 +304,7 @@ The theorem is met since $f$ is a continuous function on a closed and bounded su
 
 <section>
 
-<img data-src="./images/RNN architecture.png">
+<img data-src="./images/RNN_architecture.png">
 
 </section>
 
@@ -320,7 +320,7 @@ The theorem is met since $f$ is a continuous function on a closed and bounded su
 
 <section>
 
-<img data-src="./images/ML concept.png" width="50%">
+<img data-src="./images/ML_concept.png" width="50%">
 
 $$\theta_{ML} =  \arg\max_{\theta}  p_{model}(X;\theta) = \arg\max_{\theta}
 \prod_{i=1}^m p_{model}(x_i ;\theta)$$
@@ -462,7 +462,7 @@ $$\vec{x}.append(x_{target})$$
 
 The output layer consists on a dense layer with a softmax activation function
 
-  <img data-src="./images/Output classif.png" width = "60%">
+  <img data-src="./images/Output_classif.png" width = "60%">
 
 It transforms the output into the probability of predicting each specific class
 
@@ -482,7 +482,7 @@ It transforms the output into the probability of predicting each specific class
 
 The output layer consists on a dense layer with a linear activation function
 
-  <img data-src="./images/Output regression.png" width = "50%">
+  <img data-src="./images/Output_regression.png" width = "50%">
 
 It transforms the output into the estimated value of each component
 
@@ -498,7 +498,7 @@ It transforms the output into the estimated value of each component
 
 ### 5.1 action classification model
 
- <img data-src="./images/S2A step.png">
+ <img data-src="./images/S2A_step.png">
 
 ---
 
@@ -514,7 +514,7 @@ $$\displaystyle D_{\text{KL}}(p_{data}\parallel p_{model})=\sum_{x\in {\mathcal{
 
 <section>
 
-<img data-src="./images/S2A loss curve.png">
+<img data-src="./images/S2A_loss_curve.png">
 
 </section>
 
@@ -524,13 +524,13 @@ $$\displaystyle D_{\text{KL}}(p_{data}\parallel p_{model})=\sum_{x\in {\mathcal{
 
 <section>
 
-<img data-src="./images/S2A trajectory.png" width = "75%">
+<img data-src="./images/S2A_trajectory.png" width = "75%">
 
 </section>
 
 <section>
 
-<img data-src="./images/S2A trajectory components.png" width = "75%">
+<img data-src="./images/S2A_trajectory_components.png" width = "75%">
 
 </section>
 
@@ -562,7 +562,7 @@ $$\displaystyle D_{\text{KL}}(p_{data}\parallel p_{model})=\sum_{x\in {\mathcal{
 
 ### 5.2.1 sequence to sequence model
 
- <img data-src="./images/RNN s2s draw.png" height = "100%">
+ <img data-src="./images/RNN_s2s_draw.png" height = "100%">
  <img data-src="./images/Many_to_many.png" width = "30%">
 
 ---
@@ -581,7 +581,7 @@ $$\theta_{ML} =\theta_{mMSE}= \arg\max_{\theta}\sum_{i=1}^m {\frac {1}{2}}\left(
 
 <section>
 
-<img data-src="./images/Decoder loss curve.png" width = "75%">
+<img data-src="./images/Decoder_loss_curve.png" width = "75%">
 
 </section>
 
@@ -591,13 +591,13 @@ $$\theta_{ML} =\theta_{mMSE}= \arg\max_{\theta}\sum_{i=1}^m {\frac {1}{2}}\left(
 
 <section>
 
-<img data-src="./images/Medium distance sequential trajectory.png" width = "70%">
+<img data-src="./images/Medium_distance_sequential_trajectory.png" width = "70%">
 
 </section>
 
 <section>
 
-<img data-src="./images/Medium distance sequential trajectory components.png" width = "70%">
+<img data-src="./images/Medium_distance_sequential_trajectory_components.png" width = "70%">
 
 </section>
 
@@ -617,11 +617,6 @@ $$\theta_{ML} =\theta_{mMSE}= \arg\max_{\theta}\sum_{i=1}^m {\frac {1}{2}}\left(
 
  <img data-src="./images/Decoder.png">
 
-### 5.3.1 decoder model
-
- <img data-src="./images/RNN s2s draw.png" height = "100%">
- <img data-src="./images/Many_to_many.png" width = "30%">
-
 ---
 
 ### 5.3.2 decoder training
@@ -638,13 +633,13 @@ $$\theta_{ML} =\theta_{mMSE}= \arg\max_{\theta}\sum_{i=1}^m {\frac {1}{2}}\left(
 
 <section>
 
-<img data-src="./images/Medium distance best fit trajectory 2.png" width = "70%">
+<img data-src="./images/Medium_distance_best_fit_trajectory_2.png" width = "70%">
 
 </section>
 
 <section>
 
-<img data-src="./images/Medium distance best fit trajectory components 2.png" width = "70%">
+<img data-src="./images/Medium_distance_best_fit_trajectory_components_2.png" width = "70%">
 
 </section>
 
@@ -697,13 +692,13 @@ $$x_{t} =f(x_0;t) =\int_{t_0}^t f^{'}(x;t)\,{dt} +x_0$$
 
 <section>
 
-<img data-src="./images/ResNet trajectory.png" width = "70%">
+<img data-src="./images/ResNet_trajectory.png" width = "70%">
 
 </section>
 
 <section>
 
-<img data-src="./images/ResNet trajectory components.png" width = "70%">
+<img data-src="./images/ResNet_trajectory_components.png" width = "70%">
 
 </section>
 
@@ -778,17 +773,4 @@ Further investigation lines:
 
 ### Thank you!
 
- <img data-src="./images/QR paskymailweb.png">
-
----
-
-Margenes más pequeños
-Figuras más grandes
-Cuadros de teoremas más grandes
-
-Major comments:
-  Adelantar OSPA. Poner trabajo total
-  Hablar del data set de 236 trayectorias entre 10-40 nodos, dando lugar al OSPA data set. Antes del entrenamiento. Hemos generado una base de datos usando el algoritmo OSPA.
-  Agradecimientos tribunal + tutor + colaboradores Fabio Rodriguez + Miguel Angel Perez Coutiño --> articulo sometido al ICRA (congreso más prestigioso de robótica)
-
-  Los resultados es lo más importante
+ <img data-src="./images/QR_paskymailweb.png">
