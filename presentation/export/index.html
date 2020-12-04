@@ -382,8 +382,8 @@ $$a =(\delta, f)$$</p>
 
 
     
-    <section>
         <section >
+            
             <h3><a id="user-content-11-optimal-trajectory-as-a-sequence-of-optimal-actions" class="anchor" href="#11-optimal-trajectory-as-a-sequence-of-optimal-actions" aria-hidden="true"></a>1.1 optimal trajectory as a sequence of optimal actions</h3>
 <section style="text-align: left;">
 <p>A trajectory can be defined as a sequence of flight maneuvers $A =(a_0, a_1, a_2, a_3…a_{n-1})$ that drives the ornithopter from the start point A to the vicinity of the target B.</p>
@@ -391,18 +391,20 @@ $$a =(\delta, f)$$</p>
 </section>
 
             </section>
-        
-            <section >
-                <h3><a id="user-content-11-optimal-trajectory-as-a-sequence-of-optimal-states" class="anchor" href="#11-optimal-trajectory-as-a-sequence-of-optimal-states" aria-hidden="true"></a>1.1 optimal trajectory as a sequence of optimal states</h3>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-11-optimal-trajectory-as-a-sequence-of-optimal-states" class="anchor" href="#11-optimal-trajectory-as-a-sequence-of-optimal-states" aria-hidden="true"></a>1.1 optimal trajectory as a sequence of optimal states</h3>
 <section style="text-align: left;">
 <p>A trajectory can be defined as a sequence of flight states $S = (s_0, s_1, s_2, s_3…s_n)$ from start point A to the vicinity of point B.</p>
 <p>Predicting the sequence of flight states $x_i$ constitutes a <span style="color:green">regression</span> problem</p>
 </section>
 
             </section>
-        
-
-    </section>
     
 
 
@@ -550,12 +552,6 @@ $$a =(\delta, f)$$</p>
 <li>Activation functions and general architecture: set of functions that can be learned.</li>
 </ul>
 </section>
-<section style="text-align: left;">
-<p>Due to the complexity of the ornithopter problem, our NN architecture must have the capacity to capture temporal dynamic behaviors.</p>
-<blockquote>
-<p><strong>Proposal:</strong>  use a recurrent neural network with just one single layer to learn the OSPA underlaying trajectory flight dynamics</p>
-</blockquote>
-</section>
 
             </section>
     
@@ -577,18 +573,29 @@ $$a =(\delta, f)$$</p>
 
 
     
-    <section>
         <section >
+            
             <h3><a id="user-content-25-recurrent-neural-networks" class="anchor" href="#25-recurrent-neural-networks" aria-hidden="true"></a>2.5 Recurrent Neural networks</h3>
+<section style="text-align: left;">
+<p>Due to the complexity of the ornithopter problem, our NN architecture must have the capacity to capture temporal dynamic behaviors.</p>
+<blockquote>
+<p><strong>Proposal:</strong>  use a recurrent neural network with just one single layer to learn the OSPA underlaying trajectory flight dynamics</p>
+</blockquote>
+</section>
 <section style="text-align: left;">
 <img data-src="./images/RNN_architecture.png">
 <p>Connections between nodes form a directed graph along a temporal sequence. These connections allow previous outputs to be used as inputs.</p>
 </section>
 
             </section>
-        
-            <section >
-                <h3><a id="user-content-25-lstm-recurrent-neural-networks" class="anchor" href="#25-lstm-recurrent-neural-networks" aria-hidden="true"></a>2.5 LSTM Recurrent Neural networks</h3>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-25-lstm-recurrent-neural-networks" class="anchor" href="#25-lstm-recurrent-neural-networks" aria-hidden="true"></a>2.5 LSTM Recurrent Neural networks</h3>
 <img data-src="./images/RNN_gates.png" width="55%">
 <span>
 <small>
@@ -600,9 +607,6 @@ $$a =(\delta, f)$$</p>
 </span>
 
             </section>
-        
-
-    </section>
     
 
 
@@ -806,36 +810,11 @@ $$\vec{x}.append(x_{target})$$</li>
     
         <section >
             
-            <h3><a id="user-content-42-output-layer" class="anchor" href="#42-output-layer" aria-hidden="true"></a>4.2 output layer</h3>
+            <h3><a id="user-content-42-recurrent-layer" class="anchor" href="#42-recurrent-layer" aria-hidden="true"></a>4.2 recurrent layer</h3>
+<p>The recurrent layer consists on a single layer with 11 recurrent neurons</p>
+<img data-src="./images/General_schema.png" width = "60%">
 
             </section>
-    
-
-
-
-    
-    <section>
-        <section >
-            <h3><a id="user-content-421-classification-output-layer" class="anchor" href="#421-classification-output-layer" aria-hidden="true"></a>4.2.1 classification output layer</h3>
-<p>The output layer consists on a dense layer with a softmax activation function</p>
-  <img data-src="./images/Output_classif.png" width = "60%">
-<p>It transforms the output into the probability of predicting each specific class</p>
-
-            </section>
-        
-            <section >
-                <h3><a id="user-content-421-classification-output-layer-1" class="anchor" href="#421-classification-output-layer-1" aria-hidden="true"></a>4.2.1 classification output layer</h3>
-<blockquote>
-<p><strong>Proposition:</strong> If we assume that $p(x|y^k=1)$ follows a Gaussian, a softmax function is capable of estimating the probabilities of obtaining each of the categories using Bayes theorem</p>
-</blockquote>
-<script type="math/tex; mode=display">
-   p(y^k= 1|x)=\frac{p(x|y^k = 1)p(y^k = 1)}{p(x)}=\frac{e^{-z_k(x; \theta)}}{\sum_{j=1}^Ne^{-z_j(x; \theta)} }
-</script>
-
-            </section>
-        
-
-    </section>
     
 
 
@@ -843,7 +822,30 @@ $$\vec{x}.append(x_{target})$$</li>
     
         <section >
             
-            <h3><a id="user-content-422-regression-output-layer" class="anchor" href="#422-regression-output-layer" aria-hidden="true"></a>4.2.2 regression output layer</h3>
+            <h3><a id="user-content-431-classification-output-layer" class="anchor" href="#431-classification-output-layer" aria-hidden="true"></a>4.3.1 classification output layer</h3>
+<section>
+<p>The output layer consists on a dense layer with a softmax activation function</p>
+  <img data-src="./images/Output_classif.png" width = "60%">
+<p>It transforms the output into the probability of predicting each specific class</p>
+</section>
+<section>
+<blockquote>
+<p><strong>Proposition:</strong> If we assume that $p(x|y^k=1)$ follows a Gaussian, a softmax function is capable of estimating the probabilities of obtaining each of the categories using Bayes theorem</p>
+</blockquote>
+<script type="math/tex; mode=display">
+   p(y^k= 1|x)=\frac{p(x|y^k = 1)p(y^k = 1)}{p(x)}=\frac{e^{-z_k(x; \theta)}}{\sum_{j=1}^Ne^{-z_j(x; \theta)} }
+</script>
+</section>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-432-regression-output-layer" class="anchor" href="#432-regression-output-layer" aria-hidden="true"></a>4.3.2 regression output layer</h3>
 <p>The output layer consists on a dense layer with a linear activation function</p>
   <img data-src="./images/Output_regression.png" width = "50%">
 <p>It transforms the output into the estimated value of each component</p>

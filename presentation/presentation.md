@@ -117,7 +117,7 @@ Estimating the best action $a_i$ from a subset of them at each flight state $x_i
 
 </section>
 
---
+---
 
 ### 1.1 optimal trajectory as a sequence of optimal states
 
@@ -244,14 +244,6 @@ The family $\{f^\ast(x;\theta )\mid \theta \in \Theta \}$ is defined by the neur
 
 </section>
 
-<section style="text-align: left;">
-
-Due to the complexity of the ornithopter problem, our NN architecture must have the capacity to capture temporal dynamic behaviors.
-
-> **Proposal:**  use a recurrent neural network with just one single layer to learn the OSPA underlaying trajectory flight dynamics 
-
-</section>
-
 ---
 
 ### 2.4 NN parameter optimization
@@ -270,6 +262,13 @@ $$\theta^{t+1}= \theta^{t} - \alpha \frac{\partial J(x, \theta^{t})}{\partial \t
 
 ### 2.5 Recurrent Neural networks
 
+<section style="text-align: left;">
+
+Due to the complexity of the ornithopter problem, our NN architecture must have the capacity to capture temporal dynamic behaviors.
+
+> **Proposal:**  use a recurrent neural network with just one single layer to learn the OSPA underlaying trajectory flight dynamics 
+
+</section>
 
 <section style="text-align: left;">
 
@@ -279,7 +278,7 @@ Connections between nodes form a directed graph along a temporal sequence. These
 
 </section>
 
---
+---
 
 ### 2.5 LSTM Recurrent Neural networks
 
@@ -462,12 +461,17 @@ $$\vec{x}.append(x_{target})$$
 
 ---
 
+### 4.2 recurrent layer
 
-### 4.2 output layer
+The recurrent layer consists on a single layer with 11 recurrent neurons
+
+<img data-src="./images/General_schema.png" width = "60%">
 
 ---
 
-### 4.2.1 classification output layer
+### 4.3.1 classification output layer
+
+<section>
 
 The output layer consists on a dense layer with a softmax activation function
 
@@ -475,9 +479,9 @@ The output layer consists on a dense layer with a softmax activation function
 
 It transforms the output into the probability of predicting each specific class
 
---
+</section>
 
-### 4.2.1 classification output layer
+<section>
 
 > **Proposition:** If we assume that $p(x|y^k=1)$ follows a Gaussian, a softmax function is capable of estimating the probabilities of obtaining each of the categories using Bayes theorem
 
@@ -485,9 +489,11 @@ It transforms the output into the probability of predicting each specific class
    p(y^k= 1|x)=\frac{p(x|y^k = 1)p(y^k = 1)}{p(x)}=\frac{e^{-z_k(x; \theta)}}{\sum_{j=1}^Ne^{-z_j(x; \theta)} }
 </script>
 
+</section>
+
 ---
 
-### 4.2.2 regression output layer
+### 4.3.2 regression output layer
 
 The output layer consists on a dense layer with a linear activation function
 
